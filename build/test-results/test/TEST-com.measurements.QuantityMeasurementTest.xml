@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.measurements.QuantityMeasurementTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-06-02T15:47:17" hostname="KYOOLBABA" time="0.003">
+<testsuite name="com.measurements.QuantityMeasurementTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2020-06-02T19:15:17" hostname="KYOOLBABA" time="0.012">
   <properties/>
-  <testcase name="givenTwoValues_whenCreated_shouldReturnNull" classname="com.measurements.QuantityMeasurementTest" time="0.003"/>
+  <testcase name="givenTwoIdenticalValues_when1InchNotEqualTo1Feet_shouldReturnFalse" classname="com.measurements.QuantityMeasurementTest" time="0.003"/>
+  <testcase name="givenTwoValues_whenCreated_shouldReturnNull" classname="com.measurements.QuantityMeasurementTest" time="0.0"/>
+  <testcase name="givenTwoZeroValues_whenCreated_shouldReturnSameReference" classname="com.measurements.QuantityMeasurementTest" time="0.0"/>
+  <testcase name="givenTwoIdenticalValues_when1feetNotEqualTo1Inch_shouldReturnFalse" classname="com.measurements.QuantityMeasurementTest" time="0.0"/>
+  <testcase name="givenTwoValues_when12InchEqualTo1Foot_shouldReturnSameReference" classname="com.measurements.QuantityMeasurementTest" time="0.0"/>
+  <testcase name="given3FeetAnd1Yard_whenCompared_shouldReturnTrue" classname="com.measurements.QuantityMeasurementTest" time="0.0"/>
+  <testcase name="given36InchAnd1Yard_whenCompared_shouldReturnTrue" classname="com.measurements.QuantityMeasurementTest" time="0.0"/>
+  <testcase name="given1YardAnd3Feet_whenCompared_shouldReturnTrue" classname="com.measurements.QuantityMeasurementTest" time="0.001"/>
+  <testcase name="givenSamelengthsOfInch_whenCompared_shouldReturnTrue" classname="com.measurements.QuantityMeasurementTest" time="0.0"/>
+  <testcase name="given1InchAnd1Yard_whenCompared_shouldReturnTrue" classname="com.measurements.QuantityMeasurementTest" time="0.0"/>
+  <testcase name="givenTwoValues_whenCreated_shouldReturnSameReference" classname="com.measurements.QuantityMeasurementTest" time="0.0"/>
+  <testcase name="given1FeetAnd1Yard_whenCompared_shouldReturnTrue" classname="com.measurements.QuantityMeasurementTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

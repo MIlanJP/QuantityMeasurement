@@ -3,18 +3,15 @@ package com.measurements;
 import java.util.Objects;
 
 public class QuantityMeasurement {
-    private int CONVERTFOOTTOINCH =12 ;
+
     private double length;
 
-    public QuantityMeasurement(Unit unit, Double length) {
-        if(unit.equals(Unit.INCH))
-            this.length=length;
-        else if(unit.equals(Unit.FOOT))
-            this.length=length*CONVERTFOOTTOINCH;
-    }
-
-    public boolean compareLengths(double foot, double inch) {
-        return foot*CONVERTFOOTTOINCH==inch;
+    public QuantityMeasurement(Unit unit, Double length) throws UnitLengthException {
+        if(length==null){
+            throw new UnitLengthException("null value supplied",UnitLengthException.ExceptionType.NULLVALUESUPPLIED);
+        }else{
+            this.length=unit.getValue()*length;
+        }
     }
 
     @Override
@@ -25,6 +22,4 @@ public class QuantityMeasurement {
         return Double.compare(that.length, length) == 0;
     }
 
-    public QuantityMeasurement() {
-    }
 }

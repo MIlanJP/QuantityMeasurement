@@ -4,32 +4,141 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class QuantityMeasurementTest {
+
     @Test
-    public void givenSamelengthsOfDifferentUnits_whenCompared_shouldReturnTrue() {
-        QuantityMeasurement quantityMeasurement = new QuantityMeasurement();
-        Assert.assertTrue( quantityMeasurement.compareLengths(1,12));
+    public void givenSamelengthsOfInch_whenCompared_shouldReturnTrue() {
+        try {
+            QuantityMeasurement inch = new QuantityMeasurement(Unit.INCH, 1.0);
+            QuantityMeasurement inch1 = new QuantityMeasurement(Unit.INCH, 1.0);
+            Assert.assertEquals(inch,inch1);
+        }catch(UnitLengthException e){
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void givenSamelengthsOfDifferentUnits_whenCompared_shouldReturnFalse() {
-        QuantityMeasurement quantityMeasurement = new QuantityMeasurement();
-        Assert.assertFalse( quantityMeasurement.compareLengths(1,13));
-    }
-
-    @Test
-    public void givenTwoValues_whenCreated_shouldReturnSameReference() {
-        QuantityMeasurement foot = new QuantityMeasurement(Unit.FOOT,1.0);
-        QuantityMeasurement inch = new QuantityMeasurement(Unit.INCH,12.0);
-        Assert.assertEquals(foot,inch);
+    public void givenTwoZeroValues_whenCreated_shouldReturnSameReference()  {
+        try{
+            QuantityMeasurement foot = new QuantityMeasurement(Unit.FOOT,0.0);
+            QuantityMeasurement inch = new QuantityMeasurement(Unit.INCH,0.0);
+            Assert.assertEquals(foot,inch);
+        } catch (UnitLengthException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     public void givenTwoValues_whenCreated_shouldReturnNull() {
-        QuantityMeasurement foot = new QuantityMeasurement(Unit.FOOT,1.0);
-        QuantityMeasurement inch = new QuantityMeasurement(Unit.INCH,12.0);
-        Assert.assertFalse(foot.equals(null));
-        Assert.assertFalse(inch.equals(null));
+        try{
+            QuantityMeasurement foot = new QuantityMeasurement(Unit.FOOT,1.0);
+            QuantityMeasurement inch = new QuantityMeasurement(Unit.INCH,12.0);
+            Assert.assertFalse(inch.equals(null));
+        } catch (UnitLengthException e) {
+        e.printStackTrace();
     }
+    }
+
+    @Test
+    public void givenTwoIdenticalValues_when1InchNotEqualTo1Feet_shouldReturnFalse()  {
+        try {
+            QuantityMeasurement foot = new QuantityMeasurement(Unit.FOOT, 1.0);
+            QuantityMeasurement inch = new QuantityMeasurement(Unit.INCH, 1.0);
+            Assert.assertFalse(inch.equals(foot));
+        } catch (UnitLengthException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void givenTwoIdenticalValues_when1feetNotEqualTo1Inch_shouldReturnFalse()  {
+        try {
+            QuantityMeasurement foot = new QuantityMeasurement(Unit.FOOT, 1.0);
+            QuantityMeasurement inch = new QuantityMeasurement(Unit.INCH, 1.0);
+            Assert.assertFalse(foot.equals(inch));
+        } catch (UnitLengthException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Test
+    public void givenTwoValues_whenCreated_shouldReturnSameReference() {
+        try{
+            QuantityMeasurement foot = new QuantityMeasurement(Unit.FOOT,1.0);
+            QuantityMeasurement inch = new QuantityMeasurement(Unit.INCH,12.0);
+            Assert.assertEquals(foot,inch);
+        } catch (UnitLengthException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenTwoValues_when12InchEqualTo1Foot_shouldReturnSameReference() {
+        try{
+            QuantityMeasurement foot = new QuantityMeasurement(Unit.FOOT,1.0);
+            QuantityMeasurement inch = new QuantityMeasurement(Unit.INCH,12.0);
+            Assert.assertEquals(inch,foot);
+        } catch (UnitLengthException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void given3FeetAnd1Yard_whenCompared_shouldReturnTrue() {
+        try{
+            QuantityMeasurement foot = new QuantityMeasurement(Unit.FOOT,3.0);
+            QuantityMeasurement yard = new QuantityMeasurement(Unit.YARD,1.0);
+            Assert.assertEquals(yard,foot);
+        } catch (UnitLengthException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void given1FeetAnd1Yard_whenCompared_shouldReturnTrue() {
+        try{
+            QuantityMeasurement foot = new QuantityMeasurement(Unit.FOOT,1.0);
+            QuantityMeasurement yard = new QuantityMeasurement(Unit.YARD,1.0);
+            Assert.assertFalse(yard.equals(foot));
+        } catch (UnitLengthException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void given1InchAnd1Yard_whenCompared_shouldReturnTrue() {
+        try{
+            QuantityMeasurement inch = new QuantityMeasurement(Unit.INCH,1.0);
+            QuantityMeasurement yard = new QuantityMeasurement(Unit.YARD,1.0);
+            Assert.assertFalse(yard.equals(inch));
+        } catch (UnitLengthException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void given36InchAnd1Yard_whenCompared_shouldReturnTrue() {
+        try{
+            QuantityMeasurement inch = new QuantityMeasurement(Unit.INCH,36.0);
+            QuantityMeasurement yard = new QuantityMeasurement(Unit.YARD,1.0);
+            Assert.assertTrue(yard.equals(inch));
+        } catch (UnitLengthException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void given1YardAnd3Feet_whenCompared_shouldReturnTrue() {
+        try{
+            QuantityMeasurement inch = new QuantityMeasurement(Unit.INCH,36.0);
+            QuantityMeasurement yard = new QuantityMeasurement(Unit.YARD,1.0);
+            Assert.assertTrue(inch.equals(yard));
+        } catch (UnitLengthException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 
 }
