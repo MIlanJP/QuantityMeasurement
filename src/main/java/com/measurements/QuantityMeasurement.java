@@ -1,7 +1,5 @@
 package com.measurements;
 
-import java.util.Objects;
-
 public class QuantityMeasurement {
 
     private double length;
@@ -9,9 +7,8 @@ public class QuantityMeasurement {
     public QuantityMeasurement(Unit unit, Double length) throws UnitLengthException {
         if(length==null){
             throw new UnitLengthException("null value supplied",UnitLengthException.ExceptionType.NULLVALUESUPPLIED);
-        }else{
-            this.length=unit.getValue()*length;
         }
+        this.length=unit.getValue()*length;
     }
 
     @Override

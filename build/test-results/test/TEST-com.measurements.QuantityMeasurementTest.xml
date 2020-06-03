@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.measurements.QuantityMeasurementTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2020-06-02T19:15:17" hostname="KYOOLBABA" time="0.012">
+<testsuite name="com.measurements.QuantityMeasurementTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2020-06-02T19:19:57" hostname="KYOOLBABA" time="0.009">
   <properties/>
   <testcase name="givenTwoIdenticalValues_when1InchNotEqualTo1Feet_shouldReturnFalse" classname="com.measurements.QuantityMeasurementTest" time="0.003"/>
   <testcase name="givenTwoValues_whenCreated_shouldReturnNull" classname="com.measurements.QuantityMeasurementTest" time="0.0"/>
