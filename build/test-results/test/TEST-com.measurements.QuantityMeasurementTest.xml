@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.measurements.QuantityMeasurementTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-06-05T13:20:51" hostname="KYOOLBABA" time="0.003">
+<testsuite name="com.measurements.QuantityMeasurementTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-06-05T14:52:49" hostname="KYOOLBABA" time="0.002">
   <properties/>
-  <testcase name="givenInchAndCentiMetersAnd3Inch_whenAdded_shouldReturnInch" classname="com.measurements.QuantityMeasurementTest" time="0.003"/>
+  <testcase name="givenLiterAndMilliliter_whenAdded_shouldReturnInGallon" classname="com.measurements.QuantityMeasurementTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

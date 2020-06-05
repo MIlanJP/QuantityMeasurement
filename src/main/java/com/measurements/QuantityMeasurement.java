@@ -1,23 +1,29 @@
 package com.measurements;
 
 import java.util.List;
-import java.util.Map;
 
 public class QuantityMeasurement {
 
     private double quantity;
-    private LengthUnits lengthUnit;
+    private Units.LengthUnits lengthUnit;
+    private Units.VolumeUnits volumeValues;
 
-    public QuantityMeasurement() {
-    }
+    public QuantityMeasurement() {}
 
-    public QuantityMeasurement(LengthUnits lengthUnits, Double quantity) throws UnitLengthException {
-     //   this.convert(lengthUnits,quantity);
+    public QuantityMeasurement(Units.LengthUnits lengthUnits, Double quantity) throws UnitLengthException {
         if(quantity ==null){
             throw new UnitLengthException("null value supplied",UnitLengthException.ExceptionType.NULLVALUESUPPLIED);
         }
-        this.quantity = lengthUnits.getValue()* quantity;
+        this.quantity = lengthUnits.getLengthValue()* quantity;
         this.lengthUnit = lengthUnits;
+    }
+
+    public QuantityMeasurement(Units.VolumeUnits volumeUnits, Double quantity) throws UnitLengthException {
+        if(quantity ==null){
+            throw new UnitLengthException("null value supplied",UnitLengthException.ExceptionType.NULLVALUESUPPLIED);
+        }
+        this.quantity = volumeUnits.getVolumeValue()* quantity;
+        this.volumeValues = volumeUnits;
     }
 
 //    public QuantityMeasurement(TemperatureUnits tempUnits, Double quantity) throws UnitLengthException {
@@ -32,12 +38,20 @@ public class QuantityMeasurement {
 //           this.quantity = quantity;
 //    }
 
-    public double convert(LengthUnits unitin , Double length, LengthUnits unitout) throws UnitLengthException {
+    public double convert(Units.LengthUnits unitin , Double length, Units.LengthUnits unitout) throws UnitLengthException {
         if(length==null||unitout==null||unitin==null)
             throw new UnitLengthException("null value entered"
                     ,UnitLengthException.ExceptionType.NULLVALUESUPPLIED);
-        this.quantity =unitin.getValue()*length;
-        return (this.quantity /unitout.getValue());
+        this.quantity =unitin.getLengthValue()*length;
+        return Math.round(this.quantity /unitout.getLengthValue()*100.0)/100.0;
+    }
+
+    public double convert(Units.VolumeUnits unitin , Double length, Units.VolumeUnits unitout) throws UnitLengthException {
+        if(length==null||unitout==null||unitin==null)
+            throw new UnitLengthException("null value entered"
+                    ,UnitLengthException.ExceptionType.NULLVALUESUPPLIED);
+        this.quantity =unitin.getVolumeValue()*length;
+        return Math.round(this.quantity /unitout.getVolumeValue()*100.0)/100.0;
     }
 
 //    public double convert(TemperatureUnits unitin , Double degree, TemperatureUnits unitout) throws UnitLengthException {
@@ -59,17 +73,22 @@ public class QuantityMeasurement {
 //        return this.quantity;
 //    }
 
-//    public double convert(LengthUnits lengthUnits, Double quantity) throws UnitLengthException {
-//
-//    }
-
-    public QuantityMeasurement add(List<QuantityMeasurement> lengths, LengthUnits requiredUnit) throws UnitLengthException {
+    public QuantityMeasurement add(List<QuantityMeasurement> lengths, Units.LengthUnits requiredUnit) throws UnitLengthException {
         double totalLength=0;
         for(QuantityMeasurement measurement:lengths){
             totalLength+=measurement.quantity;
         }
-        return new QuantityMeasurement(requiredUnit,Math.round(totalLength/requiredUnit.getValue() * 100.0) / 100.);
+        return new QuantityMeasurement(requiredUnit,Math.round(totalLength/requiredUnit.getLengthValue() * 100.0) / 100.);
     }
+
+    public QuantityMeasurement add(List<QuantityMeasurement> lengths, Units.VolumeUnits requiredUnit) throws UnitLengthException {
+        double totalLength=0;
+        for(QuantityMeasurement measurement:lengths){
+            totalLength+=measurement.quantity;
+        }
+        return new QuantityMeasurement(requiredUnit,Math.round(totalLength/requiredUnit.getVolumeValue() * 100.0) / 100.);
+    }
+
 
     @Override
     public boolean equals(Object o) {
