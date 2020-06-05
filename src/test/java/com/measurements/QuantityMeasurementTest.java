@@ -468,7 +468,77 @@ public class QuantityMeasurementTest {
         }
     }
 
+    @Test
+    public void given1Kilogram_whenConverted_shouldReturnInGramPositiveTesting() {
+        try{
+            QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
+            double grams=quantityMeasurement.convert(Units.WeightUnits.KILOGRAM,1.0, Units.WeightUnits.GRAMS);
+            Assert.assertEquals(1000,grams,.1);
+        } catch (UnitLengthException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void given1Kilogram_whenConverted_shouldReturnInGramNegativeTesting() {
+        try{
+            QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
+            double grams=quantityMeasurement.convert(Units.WeightUnits.KILOGRAM,1.0, Units.WeightUnits.GRAMS);
+            Assert.assertNotEquals(10000,grams,.1);
+        } catch (UnitLengthException e) {
+            e.printStackTrace();
+        }
+    }
 
+    @Test
+    public void given1Tonne_whenConverted_shouldReturnInKilogramPositiveTesting() {
+        try{
+            QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
+            double grams=quantityMeasurement.convert(Units.WeightUnits.TONNE,1.0, Units.WeightUnits.KILOGRAM);
+            Assert.assertEquals(1000,grams,.1);
+        } catch (UnitLengthException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void given1Tonne_whenConverted_shouldReturnInKilogramNegativeTesting() {
+        try{
+            QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
+            double grams=quantityMeasurement.convert(Units.WeightUnits.TONNE,1.0, Units.WeightUnits.KILOGRAM);
+            Assert.assertNotEquals(10000,grams,.1);
+        } catch (UnitLengthException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenTonnwAndGram_whenAdded_shouldReturnInKilogram() {
+        try{
+            QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
+            List<QuantityMeasurement> listOfLengths=new ArrayList();
+            listOfLengths.add( new QuantityMeasurement(Units.WeightUnits.GRAMS,1000.0));
+            listOfLengths.add( new QuantityMeasurement(Units.WeightUnits.TONNE,1.0));
+            QuantityMeasurement actualObject=quantityMeasurement.add(listOfLengths, Units.WeightUnits.KILOGRAM);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.WeightUnits.KILOGRAM,1001.0);
+            Assert.assertEquals(actualObject,expectedObject);
+        }catch (UnitLengthException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenTonnwAndGram_whenAdded_shouldReturnInTonne() {
+        try{
+            QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
+            List<QuantityMeasurement> listOfLengths=new ArrayList();
+            listOfLengths.add( new QuantityMeasurement(Units.WeightUnits.KILOGRAM,1000.0));
+            listOfLengths.add( new QuantityMeasurement(Units.WeightUnits.TONNE,1.0));
+            QuantityMeasurement actualObject=quantityMeasurement.add(listOfLengths, Units.WeightUnits.TONNE);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.WeightUnits.TONNE,2.00);
+            Assert.assertEquals(actualObject,expectedObject);
+        }catch (UnitLengthException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     //    @Test

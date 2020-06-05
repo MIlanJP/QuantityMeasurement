@@ -51,4 +51,17 @@ public enum Units {
 
     }
 
+    enum WeightUnits{
+        GRAMS(1.0),KILOGRAM(1000.0),TONNE(1000000.0);
+        private Double value;
+
+        WeightUnits(Double value) {
+            this.value = value;
+        }
+
+        public Double getWeightValue() {
+            return value;
+        }
+    }
+
 }

@@ -5,8 +5,9 @@ import java.util.List;
 public class QuantityMeasurement {
 
     private double quantity;
-    private Units.LengthUnits lengthUnit;
+    private Units.LengthUnits lengthValues;
     private Units.VolumeUnits volumeValues;
+    private Units.WeightUnits weightvalues;
 
     public QuantityMeasurement() {}
 
@@ -15,7 +16,7 @@ public class QuantityMeasurement {
             throw new UnitLengthException("null value supplied",UnitLengthException.ExceptionType.NULLVALUESUPPLIED);
         }
         this.quantity = lengthUnits.getLengthValue()* quantity;
-        this.lengthUnit = lengthUnits;
+        this.lengthValues = lengthUnits;
     }
 
     public QuantityMeasurement(Units.VolumeUnits volumeUnits, Double quantity) throws UnitLengthException {
@@ -24,6 +25,14 @@ public class QuantityMeasurement {
         }
         this.quantity = volumeUnits.getVolumeValue()* quantity;
         this.volumeValues = volumeUnits;
+    }
+
+    public QuantityMeasurement(Units.WeightUnits weightUnits, Double quantity) throws UnitLengthException {
+        if(quantity ==null){
+            throw new UnitLengthException("null value supplied",UnitLengthException.ExceptionType.NULLVALUESUPPLIED);
+        }
+        this.quantity = weightUnits.getWeightValue()* quantity;
+        this.weightvalues = weightUnits;
     }
 
 //    public QuantityMeasurement(TemperatureUnits tempUnits, Double quantity) throws UnitLengthException {
@@ -52,6 +61,14 @@ public class QuantityMeasurement {
                     ,UnitLengthException.ExceptionType.NULLVALUESUPPLIED);
         this.quantity =unitin.getVolumeValue()*length;
         return Math.round(this.quantity /unitout.getVolumeValue()*100.0)/100.0;
+    }
+
+    public double convert(Units.WeightUnits unitin , Double length, Units.WeightUnits unitout) throws UnitLengthException {
+        if(length==null||unitout==null||unitin==null)
+            throw new UnitLengthException("null value entered"
+                    ,UnitLengthException.ExceptionType.NULLVALUESUPPLIED);
+        this.quantity =unitin.getWeightValue()*length;
+        return Math.round(this.quantity /unitout.getWeightValue()*100.0)/100.0;
     }
 
 //    public double convert(TemperatureUnits unitin , Double degree, TemperatureUnits unitout) throws UnitLengthException {
@@ -87,6 +104,14 @@ public class QuantityMeasurement {
             totalLength+=measurement.quantity;
         }
         return new QuantityMeasurement(requiredUnit,Math.round(totalLength/requiredUnit.getVolumeValue() * 100.0) / 100.);
+    }
+
+    public QuantityMeasurement add(List<QuantityMeasurement> lengths, Units.WeightUnits requiredUnit) throws UnitLengthException {
+        double totalLength=0;
+        for(QuantityMeasurement measurement:lengths){
+            totalLength+=measurement.quantity;
+        }
+        return new QuantityMeasurement(requiredUnit,Math.round(totalLength/requiredUnit.getWeightValue() * 100.0) / 100.);
     }
 
 
