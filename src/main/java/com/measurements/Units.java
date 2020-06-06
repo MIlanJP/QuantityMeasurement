@@ -1,67 +1,24 @@
 package com.measurements;
 
 public enum Units {
-    MAINENUM;
+    INCH("LENGTH",1.0),FOOT("LENGTH",12.0),YARD("LENGTH",36.0),
+    KILOGRAM("WEIGHT",1.0),GRAM("WEIGHT",.001),TONNE("WEIGHT",1000.0),
+    LITER("VOLUME",1000),MILLILITER("VOLUME",1),GALLON("VOLUME",3780),
+    CELCIUS("TEMPERATURE",1.0),
+    KELVIN("TEMPERATURE",273.15),
+    FAHRENHIETIN("TEMPERATURE",1.8,32),
+    FAHRENHIETOUT("TEMPERATURE",32,(1.0/1.8));
 
+    private final Object[] values;
 
-    enum LengthUnits{
-        INCH(1.0),FOOT(12.0),YARD(36.0),CENTIMETER(.393701);
-        private Double value;
+    Units( Object ... values) {
+        this.values = values;
+    }
 
-        LengthUnits(Double value) {
-            this.value = value;
-        }
-
-        public Double getLengthValue() {
-            return value;
-        }
+    public Object[] getValue() {
+        return values;
     }
 
 
-     enum TemperatureUnits {
-        CELCIUS(1),FAHRENHIET(32,(1.8   )),KELVIN(273.15);
-
-        double[] temperatureValues;
-        TemperatureUnits(double ... tempvalues) {
-            this.temperatureValues = tempvalues;
-        }
-
-        public double getFirstValue() {
-            return temperatureValues[0];
-        }
-
-        public double getSecondValue() {
-            return temperatureValues[1];
-        }
-    }
-
-
-    enum VolumeUnits {
-        MILLILITER(1.0),GALLON(3785.41),LITER(1000);
-
-        double volumeValue;
-
-        VolumeUnits(double volumeValue) {
-            this.volumeValue = volumeValue;
-        }
-
-        public Double getVolumeValue() {
-            return volumeValue;
-        }
-
-    }
-
-    enum WeightUnits{
-        GRAMS(1.0),KILOGRAM(1000.0),TONNE(1000000.0);
-        private Double value;
-
-        WeightUnits(Double value) {
-            this.value = value;
-        }
-
-        public Double getWeightValue() {
-            return value;
-        }
-    }
 
 }

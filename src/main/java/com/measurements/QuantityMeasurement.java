@@ -1,23 +1,21 @@
 package com.measurements;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class QuantityMeasurement {
 
     private double quantity;
-    private Units.LengthUnits lengthValues;
-    private Units.VolumeUnits volumeValues;
-    private Units.WeightUnits weightvalues;
-    private Units.TemperatureUnits temperatureValues;
+    private Units lengthValues;
+    private Units volumeValues;
+    private Units weightvalues;
+    private Units temperatureValues;
 
     public QuantityMeasurement() {}
 
-    public QuantityMeasurement(Units.LengthUnits lengthUnits, Double quantity) throws UnitLengthException {
-        if(quantity ==null){
-            throw new UnitLengthException("null value supplied",UnitLengthException.ExceptionType.NULLVALUESUPPLIED);
-        }
-        this.quantity = lengthUnits.getLengthValue()* quantity;
-        this.lengthValues = lengthUnits;
+    public QuantityMeasurement(Units units, Double quantity) throws UnitLengthException {
+        List unitValues = Arrays.asList(units.getValue());
+
     }
 
     public QuantityMeasurement(Units.VolumeUnits volumeUnits, Double quantity) throws UnitLengthException {

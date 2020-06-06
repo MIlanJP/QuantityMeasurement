@@ -12,7 +12,7 @@ public class QuantityMeasurementTest {
     public void givenSamelengthsOfInch_whenCompared_shouldReturnTrue() {
         try {
             QuantityMeasurement inch = new QuantityMeasurement(Units.LengthUnits.INCH, 1.0);
-            QuantityMeasurement inch1 = new QuantityMeasurement(Units.LengthUnits.INCH, 1.0);
+            QuantityMeasurement inch1 = new QuantityMeasurement(Units.INCH, 1.0);
             Assert.assertEquals(inch,inch1);
         }catch(UnitLengthException e){
             e.printStackTrace();
