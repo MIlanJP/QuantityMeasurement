@@ -10,11 +10,19 @@ public class QuantityMeasurement {
 
     public QuantityMeasurement() {}
 
-    public QuantityMeasurement(Units units, Double quantity) throws UnitLengthException {
-        //List unitValues = Arrays.asList(units.getValue());
+    public QuantityMeasurement(Units units, Double quantity)  {
         if(units.getValue()[0]!="TEMPERATURE")
             this.quantity =(Double)units.getValue()[1]*quantity;
+        else if(units.getValue()[0]=="TEMPERATURE"){
+            if(units==Units.FAHRENHIET)
+                this.quantity =(quantity -(Double)units.getValue()[1])*(1.00/(Double)units.getValue()[2]);
+       else if(units==Units.KELVIN)
+            this.quantity = quantity -(Double)units.getValue()[1];
+       else
+           this.quantity = quantity;
+        }
         this.units=units;
+
     }
 
     public double convert(Units unitin , Double quantity, Units unitout) throws UnitLengthException {
@@ -27,7 +35,21 @@ public class QuantityMeasurement {
         if(quantity==null||unitout==null||unitin==null)
             throw new UnitLengthException("null value entered"
                     ,UnitLengthException.ExceptionType.NULLVALUESUPPLIED);
+        if(unitin==Units.FAHRENHIET)
+            this.quantity= (quantity-(Double)unitin.getValue()[2])*(1.0/(Double)unitin.getValue()[1]);
+        else if(units==Units.KELVIN)
+            this.quantity=  quantity-(Double)unitin.getValue()[1];
+        else if(units==Units.CELCIUS)
+            this.quantity =quantity;
+        if(unitout==Units.KELVIN)
+            return this.quantity+(Double)unitin.getValue()[1];
+        else if(unitout==Units.FAHRENHIET)
+            return (this.quantity+(Double)unitout.getValue()[1])+(Double)unitin.getValue()[2];
+        else if(unitout==Units.CELCIUS)
+            return this.quantity;
+
         this.quantity =(Double)unitValuesIn.get(1)*quantity;
+
         return Math.round(this.quantity /(Double)unitValuesOut.get(1)*100.0)/100.0;
     }
 
@@ -41,55 +63,6 @@ public class QuantityMeasurement {
         }
         return new QuantityMeasurement(requiredUnit,Math.round(totalLength/(Double)requiredUnit.getValue()[1] * 100.0) / 100.);
     }
-
-    //    public QuantityMeasurement(Units.TemperatureUnits tempUnits, Double quantity) throws UnitLengthException {
-//        if(quantity ==null){
-//            throw new UnitLengthException("null value supplied",UnitLengthException.ExceptionType.NULLVALUESUPPLIED);
-//        }
-//       if(tempUnits==Units.TemperatureUnits.FAHRENHIET)
-//           this.quantity =(quantity -tempUnits.getFirstValue())*(1.00/tempUnits.getSecondValue());
-//       else if(tempUnits==Units.TemperatureUnits.KELVIN)
-//            this.quantity = quantity -tempUnits.getFirstValue();
-//       else
-//           this.quantity = quantity;
-//       this.temperatureValues=tempUnits;
-//    }
-
-
-//    public double convert(Units.TemperatureUnits unitin , Double degree, Units.TemperatureUnits unitout) throws UnitLengthException {
-//        if(degree==null||unitout==null||unitin==null)
-//            throw new UnitLengthException("null value entered"
-//                    ,UnitLengthException.ExceptionType.NULLVALUESUPPLIED);
-//        //Conversion To Celcius
-//        if(unitin==Units.TemperatureUnits.FAHRENHIET)
-//            this.quantity =(degree -(unitin.getFirstValue()))*unitin.getSecondValue();
-//        else if(unitin==Units.TemperatureUnits.KELVIN)
-//            this.quantity =(quantity -unitin.getFirstValue());
-//        else
-//            this.quantity =degree;
-//        //Output in Required Unit
-//        if(unitout==Units.TemperatureUnits.FAHRENHIET)
-//            return (this.quantity *unitout.getFirstValue())+unitout.getSecondValue();
-//        else if(unitout==Units.TemperatureUnits.KELVIN)
-//            return (this.quantity +unitout.getFirstValue());
-//        return this.quantity;
-//    }
-
-//    public QuantityMeasurement add(List<QuantityMeasurement> lengths, Units.TemperatureUnits requiredUnit) throws UnitLengthException {
-//        double totalLength=0;
-//        for(QuantityMeasurement measurement:lengths){
-//            totalLength+=measurement.quantity;
-//        }
-//        if(requiredUnit==Units.TemperatureUnits.FAHRENHIET)
-//            return new QuantityMeasurement(requiredUnit,
-//                    Math.round(((this.quantity *(requiredUnit.getSecondValue()))+requiredUnit.getSecondValue())*100.0)/100.0);
-//        else if(requiredUnit==Units.TemperatureUnits.KELVIN){
-//            return new QuantityMeasurement(requiredUnit,
-//                    Math.round(((this.quantity *requiredUnit.getFirstValue())+requiredUnit.getSecondValue())*100.0)/100.0);
-//        }
-//        return new QuantityMeasurement(requiredUnit,this.quantity);
-//    }
-
 
     @Override
     public boolean equals(Object o) {

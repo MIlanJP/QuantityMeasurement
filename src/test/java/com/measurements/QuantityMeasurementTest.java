@@ -10,134 +10,88 @@ public class QuantityMeasurementTest {
 
     @Test
     public void givenSamelengthsOfInch_whenCompared_shouldReturnTrue() {
-        try {
-            QuantityMeasurement inch = new QuantityMeasurement(Units.INCH, 1.0);
-            QuantityMeasurement inch1 = new QuantityMeasurement(Units.INCH, 1.0);
-            Assert.assertEquals(inch,inch1);
-        }catch(UnitLengthException e){
-            e.printStackTrace();
-        }
+        QuantityMeasurement inch = new QuantityMeasurement(Units.INCH, 1.0);
+        QuantityMeasurement inch1 = new QuantityMeasurement(Units.INCH, 1.0);
+        Assert.assertEquals(inch,inch1);
     }
 
     @Test
     public void givenTwoZeroValues_whenCreated_shouldReturnSameReference()  {
-        try{
-            QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT,0.0);
-            QuantityMeasurement inch = new QuantityMeasurement(Units.INCH,0.0);
-            Assert.assertEquals(foot,inch);
-        } catch (UnitLengthException e) {
-            e.printStackTrace();
-        }
+        QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT,0.0);
+        QuantityMeasurement inch = new QuantityMeasurement(Units.INCH,0.0);
+        Assert.assertEquals(foot,inch);
     }
 
     @Test
     public void givenTwoValues_whenCreated_shouldReturnNull() {
-        try{
-            QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT,1.0);
-            QuantityMeasurement inch = null;
-            Assert.assertFalse(foot.equals(inch));
-        } catch (UnitLengthException e) {
-        e.printStackTrace();
-    }
+        QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT,1.0);
+        QuantityMeasurement inch = null;
+        Assert.assertFalse(foot.equals(inch));
     }
 
     @Test
     public void givenTwoIdenticalValues_when1InchNotEqualTo1Feet_shouldReturnFalse()  {
-        try {
-            QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT, 1.0);
-            QuantityMeasurement inch = new QuantityMeasurement(Units.INCH, 1.0);
-            Assert.assertNotEquals(inch,foot);
-        } catch (UnitLengthException e) {
-            e.printStackTrace();
-        }
+        QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT, 1.0);
+        QuantityMeasurement inch = new QuantityMeasurement(Units.INCH, 1.0);
+        Assert.assertNotEquals(inch,foot);
     }
     @Test
     public void givenTwoIdenticalValues_when1feetNotEqualTo1Inch_shouldReturnFalse()  {
-        try {
-            QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT, 1.0);
-            QuantityMeasurement inch = new QuantityMeasurement(Units.INCH, 1.0);
-            Assert.assertFalse(foot.equals(inch));
-        } catch (UnitLengthException e) {
-            e.printStackTrace();
-        }
+        QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT, 1.0);
+        QuantityMeasurement inch = new QuantityMeasurement(Units.INCH, 1.0);
+        Assert.assertFalse(foot.equals(inch));
     }
 
 
     @Test
     public void givenTwoValues_whenCreated_shouldReturnSameReference() {
-        try{
-            QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT,1.0);
-            QuantityMeasurement inch = new QuantityMeasurement(Units.INCH,12.0);
-            Assert.assertEquals(foot,inch);
-        } catch (UnitLengthException e) {
-            e.printStackTrace();
-        }
+        QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT,1.0);
+        QuantityMeasurement inch = new QuantityMeasurement(Units.INCH,12.0);
+        Assert.assertEquals(foot,inch);
     }
 
     @Test
     public void givenTwoValues_when12InchEqualTo1Foot_shouldReturnSameReference() {
-        try{
-            QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT,1.0);
-            QuantityMeasurement inch = new QuantityMeasurement(Units.INCH,12.0);
-            Assert.assertEquals(inch,foot);
-        } catch (UnitLengthException e) {
-            e.printStackTrace();
-        }
+        QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT,1.0);
+        QuantityMeasurement inch = new QuantityMeasurement(Units.INCH,12.0);
+        Assert.assertEquals(inch,foot);
     }
 
     @Test
     public void given3FeetAnd1Yard_whenCompared_shouldReturnTrue() {
-        try{
-            QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT,3.0);
-            QuantityMeasurement yard = new QuantityMeasurement(Units.YARD,1.0);
-            Assert.assertEquals(yard,foot);
-        } catch (UnitLengthException e) {
-            e.printStackTrace();
-        }
+        QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT,3.0);
+        QuantityMeasurement yard = new QuantityMeasurement(Units.YARD,1.0);
+        Assert.assertEquals(yard,foot);
     }
 
     @Test
     public void given1FeetAnd1Yard_whenCompared_shouldReturnTrue() {
-        try{
-            QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT,1.0);
-            QuantityMeasurement yard = new QuantityMeasurement(Units.YARD,1.0);
-            Assert.assertFalse(yard.equals(foot));
-        } catch (UnitLengthException e) {
-            e.printStackTrace();
-        }
+        QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT,1.0);
+        QuantityMeasurement yard = new QuantityMeasurement(Units.YARD,1.0);
+        Assert.assertFalse(yard.equals(foot));
     }
 
     @Test
     public void given1InchAnd1Yard_whenCompared_shouldReturnTrue() {
-        try{
-            QuantityMeasurement inch = new QuantityMeasurement(Units.INCH,1.0);
+            QuantityMeasurement inch = new QuantityMeasurement(Units.MILLILITER,1.0);
             QuantityMeasurement yard = new QuantityMeasurement(Units.YARD,1.0);
             Assert.assertFalse(yard.equals(inch));
-        } catch (UnitLengthException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Test
     public void given36InchAnd1Yard_whenCompared_shouldReturnTrue() {
-        try{
             QuantityMeasurement inch = new QuantityMeasurement(Units.INCH,36.0);
             QuantityMeasurement yard = new QuantityMeasurement(Units.YARD,1.0);
             Assert.assertTrue(yard.equals(inch));
-        } catch (UnitLengthException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Test
     public void given1YardAnd3Feet_whenCompared_shouldReturnTrue() {
-        try{
-            QuantityMeasurement inch = new QuantityMeasurement(Units.INCH,36.0);
-            QuantityMeasurement yard = new QuantityMeasurement(Units.YARD,1.0);
-            Assert.assertTrue(inch.equals(yard));
-        } catch (UnitLengthException e) {
-            e.printStackTrace();
-        }
+        QuantityMeasurement inch = new QuantityMeasurement(Units.INCH,36.0);
+        QuantityMeasurement yard = new QuantityMeasurement(Units.YARD,1.0);
+        Assert.assertTrue(inch.equals(yard));
     }
 
     @Test
@@ -159,6 +113,17 @@ public class QuantityMeasurementTest {
             Assert.assertEquals(36.0,foot,.02);
         } catch (UnitLengthException e) {
             e.printStackTrace();
+        }
+    }
+    @Test
+    public void given1Yard_whenCoverted_shouldthrowException() {
+        try{
+            QuantityMeasurement yardtoFoot=new QuantityMeasurement();
+            double foot=yardtoFoot.convert(Units.YARD,1.0, Units.LITER);
+          //  Assert.assertEquals(36.0,foot,.02);
+        } catch (UnitLengthException e) {
+            e.printStackTrace();
+            Assert.assertEquals(UnitLengthException.ExceptionType.INVALID_CONVERSION,e.type);
         }
     }
 
@@ -207,6 +172,38 @@ public class QuantityMeasurementTest {
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
         e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void given2InchAnd2Litre_whenAdded_shouldThroughException() {
+        try{
+            QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
+            List<QuantityMeasurement> lisyOfLengths=new ArrayList();
+            lisyOfLengths.add( new QuantityMeasurement(Units.INCH,2.0));
+            lisyOfLengths.add( new QuantityMeasurement(Units.LITER,2.0));
+            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.INCH);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.INCH,4.0);
+        }catch (UnitLengthException e) {
+            Assert.assertEquals(UnitLengthException.ExceptionType.INVALID_CONVERSION,e.type);
+
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void given2InchAnd2LitreForWrongUnite_whenAdded_shouldThroughException() {
+        try{
+            QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
+            List<QuantityMeasurement> lisyOfLengths=new ArrayList();
+            lisyOfLengths.add( new QuantityMeasurement(Units.INCH,2.0));
+            lisyOfLengths.add( new QuantityMeasurement(Units.FOOT,2.0));
+            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.MILLILITER);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.INCH,4.0);
+        }catch (UnitLengthException e) {
+            Assert.assertEquals(UnitLengthException.ExceptionType.INVALID_CONVERSION,e.type);
+
+            e.printStackTrace();
         }
     }
 
@@ -553,44 +550,33 @@ public class QuantityMeasurementTest {
     }
 
 
-    @Test
-    public void givenCelcuisAndKelvin_whenAdded_shouldReturnInFahrenheit() {
+
+
+
+        @Test
+    public void givenCelcius_whenCoverted_shouldReturnItInKelvin() {
         try{
-            QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
-            List<QuantityMeasurement> listOfLengths=new ArrayList();
-            listOfLengths.add( new QuantityMeasurement(Units.CELCIUS,30.0));
-            listOfLengths.add( new QuantityMeasurement(Units.KELVIN,373.15));
-            QuantityMeasurement actualObject=quantityMeasurement.add(listOfLengths, Units.FAHRENHIET);
-            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.FAHRENHIET,266.0);
-            Assert.assertEquals(actualObject,expectedObject);
-        }catch (UnitLengthException e) {
+            QuantityMeasurement yardtoFoot=new QuantityMeasurement();
+            double foot=yardtoFoot.convert(Units.CELCIUS,1.0, Units.KELVIN);
+            Assert.assertEquals(274.15,foot,.1);
+        } catch (UnitLengthException e) {
             e.printStackTrace();
         }
     }
 
+    @Test
+    public void givenCelcius_whenCompared_shouldReturnEqual() {
+        QuantityMeasurement celcuis=new QuantityMeasurement(Units.CELCIUS,30.0);
+        QuantityMeasurement kelvin=new QuantityMeasurement(Units.KELVIN,303.15);
+        Assert.assertEquals(celcuis,kelvin);
+    }
 
-    //    @Test
-//    public void givenCelcius_whenCoverted_shouldReturnItInKelvin() {
-//        try{
-//            QuantityMeasurement yardtoFoot=new QuantityMeasurement();
-//            double foot=yardtoFoot.convert(TemperatureUnits.CELCIUS,1.0, TemperatureUnits.KELVIN);
-//            Assert.assertEquals(274.15,foot,.1);
-//        } catch (UnitLengthException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
 //    @Test
 //    public void givenCelcius_whenCompared_shouldReturnItInKelvin() {
-//        try{
-//            QuantityMeasurement celcuis=new QuantityMeasurement(TemperatureUnits.CELCIUS,30.0);
-//            QuantityMeasurement kelvin=new QuantityMeasurement(TemperatureUnits.KELVIN,303.15);
-//            Assert.assertEquals(celcuis,kelvin);
-//        } catch (UnitLengthException e) {
-//            e.printStackTrace();
-//        }
+//        QuantityMeasurement celcuis=new QuantityMeasurement(Units.CELCIUS,30.0);
+//        QuantityMeasurement fahrenhiet=new QuantityMeasurement(Units.FAHRENHIET,86.0);
+//        Assert.assertEquals(celcuis,fahrenhiet);
 //    }
-
 
 
 
