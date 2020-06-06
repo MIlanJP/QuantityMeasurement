@@ -11,7 +11,7 @@ public class QuantityMeasurementTest {
     @Test
     public void givenSamelengthsOfInch_whenCompared_shouldReturnTrue() {
         try {
-            QuantityMeasurement inch = new QuantityMeasurement(Units.LengthUnits.INCH, 1.0);
+            QuantityMeasurement inch = new QuantityMeasurement(Units.INCH, 1.0);
             QuantityMeasurement inch1 = new QuantityMeasurement(Units.INCH, 1.0);
             Assert.assertEquals(inch,inch1);
         }catch(UnitLengthException e){
@@ -22,8 +22,8 @@ public class QuantityMeasurementTest {
     @Test
     public void givenTwoZeroValues_whenCreated_shouldReturnSameReference()  {
         try{
-            QuantityMeasurement foot = new QuantityMeasurement(Units.LengthUnits.FOOT,0.0);
-            QuantityMeasurement inch = new QuantityMeasurement(Units.LengthUnits.INCH,0.0);
+            QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT,0.0);
+            QuantityMeasurement inch = new QuantityMeasurement(Units.INCH,0.0);
             Assert.assertEquals(foot,inch);
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -33,7 +33,7 @@ public class QuantityMeasurementTest {
     @Test
     public void givenTwoValues_whenCreated_shouldReturnNull() {
         try{
-            QuantityMeasurement foot = new QuantityMeasurement(Units.LengthUnits.FOOT,1.0);
+            QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT,1.0);
             QuantityMeasurement inch = null;
             Assert.assertFalse(foot.equals(inch));
         } catch (UnitLengthException e) {
@@ -44,9 +44,9 @@ public class QuantityMeasurementTest {
     @Test
     public void givenTwoIdenticalValues_when1InchNotEqualTo1Feet_shouldReturnFalse()  {
         try {
-            QuantityMeasurement foot = new QuantityMeasurement(Units.LengthUnits.FOOT, 1.0);
-            QuantityMeasurement inch = new QuantityMeasurement(Units.LengthUnits.INCH, 1.0);
-            Assert.assertFalse(inch.equals(foot));
+            QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT, 1.0);
+            QuantityMeasurement inch = new QuantityMeasurement(Units.INCH, 1.0);
+            Assert.assertNotEquals(inch,foot);
         } catch (UnitLengthException e) {
             e.printStackTrace();
         }
@@ -54,8 +54,8 @@ public class QuantityMeasurementTest {
     @Test
     public void givenTwoIdenticalValues_when1feetNotEqualTo1Inch_shouldReturnFalse()  {
         try {
-            QuantityMeasurement foot = new QuantityMeasurement(Units.LengthUnits.FOOT, 1.0);
-            QuantityMeasurement inch = new QuantityMeasurement(Units.LengthUnits.INCH, 1.0);
+            QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT, 1.0);
+            QuantityMeasurement inch = new QuantityMeasurement(Units.INCH, 1.0);
             Assert.assertFalse(foot.equals(inch));
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -66,8 +66,8 @@ public class QuantityMeasurementTest {
     @Test
     public void givenTwoValues_whenCreated_shouldReturnSameReference() {
         try{
-            QuantityMeasurement foot = new QuantityMeasurement(Units.LengthUnits.FOOT,1.0);
-            QuantityMeasurement inch = new QuantityMeasurement(Units.LengthUnits.INCH,12.0);
+            QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT,1.0);
+            QuantityMeasurement inch = new QuantityMeasurement(Units.INCH,12.0);
             Assert.assertEquals(foot,inch);
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -77,8 +77,8 @@ public class QuantityMeasurementTest {
     @Test
     public void givenTwoValues_when12InchEqualTo1Foot_shouldReturnSameReference() {
         try{
-            QuantityMeasurement foot = new QuantityMeasurement(Units.LengthUnits.FOOT,1.0);
-            QuantityMeasurement inch = new QuantityMeasurement(Units.LengthUnits.INCH,12.0);
+            QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT,1.0);
+            QuantityMeasurement inch = new QuantityMeasurement(Units.INCH,12.0);
             Assert.assertEquals(inch,foot);
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -88,8 +88,8 @@ public class QuantityMeasurementTest {
     @Test
     public void given3FeetAnd1Yard_whenCompared_shouldReturnTrue() {
         try{
-            QuantityMeasurement foot = new QuantityMeasurement(Units.LengthUnits.FOOT,3.0);
-            QuantityMeasurement yard = new QuantityMeasurement(Units.LengthUnits.YARD,1.0);
+            QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT,3.0);
+            QuantityMeasurement yard = new QuantityMeasurement(Units.YARD,1.0);
             Assert.assertEquals(yard,foot);
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -99,8 +99,8 @@ public class QuantityMeasurementTest {
     @Test
     public void given1FeetAnd1Yard_whenCompared_shouldReturnTrue() {
         try{
-            QuantityMeasurement foot = new QuantityMeasurement(Units.LengthUnits.FOOT,1.0);
-            QuantityMeasurement yard = new QuantityMeasurement(Units.LengthUnits.YARD,1.0);
+            QuantityMeasurement foot = new QuantityMeasurement(Units.FOOT,1.0);
+            QuantityMeasurement yard = new QuantityMeasurement(Units.YARD,1.0);
             Assert.assertFalse(yard.equals(foot));
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -110,8 +110,8 @@ public class QuantityMeasurementTest {
     @Test
     public void given1InchAnd1Yard_whenCompared_shouldReturnTrue() {
         try{
-            QuantityMeasurement inch = new QuantityMeasurement(Units.LengthUnits.INCH,1.0);
-            QuantityMeasurement yard = new QuantityMeasurement(Units.LengthUnits.YARD,1.0);
+            QuantityMeasurement inch = new QuantityMeasurement(Units.INCH,1.0);
+            QuantityMeasurement yard = new QuantityMeasurement(Units.YARD,1.0);
             Assert.assertFalse(yard.equals(inch));
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -121,8 +121,8 @@ public class QuantityMeasurementTest {
     @Test
     public void given36InchAnd1Yard_whenCompared_shouldReturnTrue() {
         try{
-            QuantityMeasurement inch = new QuantityMeasurement(Units.LengthUnits.INCH,36.0);
-            QuantityMeasurement yard = new QuantityMeasurement(Units.LengthUnits.YARD,1.0);
+            QuantityMeasurement inch = new QuantityMeasurement(Units.INCH,36.0);
+            QuantityMeasurement yard = new QuantityMeasurement(Units.YARD,1.0);
             Assert.assertTrue(yard.equals(inch));
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -132,8 +132,8 @@ public class QuantityMeasurementTest {
     @Test
     public void given1YardAnd3Feet_whenCompared_shouldReturnTrue() {
         try{
-            QuantityMeasurement inch = new QuantityMeasurement(Units.LengthUnits.INCH,36.0);
-            QuantityMeasurement yard = new QuantityMeasurement(Units.LengthUnits.YARD,1.0);
+            QuantityMeasurement inch = new QuantityMeasurement(Units.INCH,36.0);
+            QuantityMeasurement yard = new QuantityMeasurement(Units.YARD,1.0);
             Assert.assertTrue(inch.equals(yard));
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -144,7 +144,7 @@ public class QuantityMeasurementTest {
     public void given1Yard_whenCoverted_shouldReturnItInFoot() {
         try{
            QuantityMeasurement yardtoFoot=new QuantityMeasurement();
-           double foot=yardtoFoot.convert(Units.LengthUnits.YARD,1.0, Units.LengthUnits.FOOT);
+           double foot=yardtoFoot.convert(Units.YARD,1.0, Units.FOOT);
            Assert.assertEquals(3.0,foot,.01);
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -155,7 +155,7 @@ public class QuantityMeasurementTest {
     public void given1Yard_whenCoverted_shouldReturnItInInch() {
         try{
             QuantityMeasurement yardtoFoot=new QuantityMeasurement();
-            double foot=yardtoFoot.convert(Units.LengthUnits.YARD,1.0, Units.LengthUnits.INCH);
+            double foot=yardtoFoot.convert(Units.YARD,1.0, Units.INCH);
             Assert.assertEquals(36.0,foot,.02);
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -166,7 +166,7 @@ public class QuantityMeasurementTest {
     public void given2Inch_whenConvertedtoCentimeter_shouldReturn5Centimeter() {
         try{
             QuantityMeasurement yardtoFoot=new QuantityMeasurement();
-            double foot=yardtoFoot.convert(Units.LengthUnits.INCH,2.0, Units.LengthUnits.CENTIMETER);
+            double foot=yardtoFoot.convert(Units.INCH,2.0, Units.CENTIMETER);
             Assert.assertEquals(5,foot,.1);
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -177,7 +177,7 @@ public class QuantityMeasurementTest {
     public void given1Inch_whenCoverted_shouldReturnItInFoot() {
         try{
             QuantityMeasurement yardtoFoot=new QuantityMeasurement();
-            double foot=yardtoFoot.convert(Units.LengthUnits.INCH,1.0, Units.LengthUnits.FOOT);
+            double foot=yardtoFoot.convert(Units.INCH,1.0, Units.FOOT);
             Assert.assertEquals(0.083,foot,.02);
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -188,7 +188,7 @@ public class QuantityMeasurementTest {
     public void given1Inch_whenCoverted_shouldReturnItInYard() {
         try{
             QuantityMeasurement yardtoFoot=new QuantityMeasurement();
-            double foot=yardtoFoot.convert(Units.LengthUnits.INCH,1.0, Units.LengthUnits.YARD);
+            double foot=yardtoFoot.convert(Units.INCH,1.0, Units.YARD);
             Assert.assertEquals(0.027,foot,.02);
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -200,10 +200,10 @@ public class QuantityMeasurementTest {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
             List<QuantityMeasurement> lisyOfLengths=new ArrayList();
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.INCH,2.0));
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.INCH,2.0));
-            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.LengthUnits.INCH);
-            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.LengthUnits.INCH,4.0);
+            lisyOfLengths.add( new QuantityMeasurement(Units.INCH,2.0));
+            lisyOfLengths.add( new QuantityMeasurement(Units.INCH,2.0));
+            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.INCH);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.INCH,4.0);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
         e.printStackTrace();
@@ -215,10 +215,10 @@ public class QuantityMeasurementTest {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
             List<QuantityMeasurement> lisyOfLengths=new ArrayList();
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.FOOT,1.0));
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.INCH,2.0));
-            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.LengthUnits.INCH);
-            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.LengthUnits.INCH,14.0);
+            lisyOfLengths.add( new QuantityMeasurement(Units.FOOT,1.0));
+            lisyOfLengths.add( new QuantityMeasurement(Units.INCH,2.0));
+            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.INCH);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.INCH,14.0);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
             e.printStackTrace();
@@ -230,10 +230,10 @@ public class QuantityMeasurementTest {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
             List<QuantityMeasurement> lisyOfLengths=new ArrayList();
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.FOOT,1.0));
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.FOOT,1.0));
-            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.LengthUnits.INCH);
-            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.LengthUnits.INCH,24.0);
+            lisyOfLengths.add( new QuantityMeasurement(Units.FOOT,1.0));
+            lisyOfLengths.add( new QuantityMeasurement(Units.FOOT,1.0));
+            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.INCH);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.INCH,24.0);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
             e.printStackTrace();
@@ -245,10 +245,10 @@ public class QuantityMeasurementTest {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
             List<QuantityMeasurement> lisyOfLengths=new ArrayList();
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.INCH,2.0));
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.CENTIMETER,2.5));
-            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.LengthUnits.INCH);
-            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.LengthUnits.INCH,2.98);
+            lisyOfLengths.add( new QuantityMeasurement(Units.INCH,2.0));
+            lisyOfLengths.add( new QuantityMeasurement(Units.CENTIMETER,2.5));
+            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.INCH);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.INCH,2.98);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
             e.printStackTrace();
@@ -260,10 +260,10 @@ public class QuantityMeasurementTest {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
             List<QuantityMeasurement> lisyOfLengths=new ArrayList();
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.INCH,1.0));
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.INCH,1.0));
-            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.LengthUnits.INCH);
-            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.LengthUnits.INCH,3.0);
+            lisyOfLengths.add( new QuantityMeasurement(Units.INCH,1.0));
+            lisyOfLengths.add( new QuantityMeasurement(Units.INCH,1.0));
+            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.INCH);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.INCH,3.0);
             Assert.assertNotEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
             e.printStackTrace();
@@ -275,10 +275,10 @@ public class QuantityMeasurementTest {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
             List<QuantityMeasurement> lisyOfLengths=new ArrayList();
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.INCH,3.0));
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.INCH,1.0));
-            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.LengthUnits.INCH);
-            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.LengthUnits.INCH,4.0);
+            lisyOfLengths.add( new QuantityMeasurement(Units.INCH,3.0));
+            lisyOfLengths.add( new QuantityMeasurement(Units.INCH,1.0));
+            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.INCH);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.INCH,4.0);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
             e.printStackTrace();
@@ -291,10 +291,10 @@ public class QuantityMeasurementTest {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
             List<QuantityMeasurement> lisyOfLengths=new ArrayList();
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.FOOT,3.0));
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.INCH,1.0));
-            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.LengthUnits.INCH);
-            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.LengthUnits.INCH,37.0);
+            lisyOfLengths.add( new QuantityMeasurement(Units.FOOT,3.0));
+            lisyOfLengths.add( new QuantityMeasurement(Units.INCH,1.0));
+            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.INCH);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.INCH,37.0);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
             e.printStackTrace();
@@ -306,10 +306,10 @@ public class QuantityMeasurementTest {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
             List<QuantityMeasurement> lisyOfLengths=new ArrayList();
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.FOOT,3.0));
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.INCH,1.0));
-            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.LengthUnits.FOOT);
-            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.LengthUnits.FOOT,3.08);
+            lisyOfLengths.add( new QuantityMeasurement(Units.FOOT,3.0));
+            lisyOfLengths.add( new QuantityMeasurement(Units.INCH,1.0));
+            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.FOOT);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.FOOT,3.08);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
             e.printStackTrace();
@@ -321,10 +321,10 @@ public class QuantityMeasurementTest {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
             List<QuantityMeasurement> lisyOfLengths=new ArrayList();
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.FOOT,3.0));
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.INCH,3.0));
-            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.LengthUnits.YARD);
-            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.LengthUnits.YARD,1.08);
+            lisyOfLengths.add( new QuantityMeasurement(Units.FOOT,3.0));
+            lisyOfLengths.add( new QuantityMeasurement(Units.INCH,3.0));
+            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.YARD);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.YARD,1.08);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
             e.printStackTrace();
@@ -336,10 +336,10 @@ public class QuantityMeasurementTest {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
             List<QuantityMeasurement> lisyOfLengths=new ArrayList();
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.YARD,3.0));
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.FOOT,3.0));
-            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.LengthUnits.YARD);
-            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.LengthUnits.YARD,4.0);
+            lisyOfLengths.add( new QuantityMeasurement(Units.YARD,3.0));
+            lisyOfLengths.add( new QuantityMeasurement(Units.FOOT,3.0));
+            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.YARD);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.YARD,4.0);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
             e.printStackTrace();
@@ -351,10 +351,10 @@ public class QuantityMeasurementTest {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
             List<QuantityMeasurement> lisyOfLengths=new ArrayList();
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.YARD,3.0));
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.FOOT,3.0));
-            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.LengthUnits.INCH);
-            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.LengthUnits.INCH,144.0);
+            lisyOfLengths.add( new QuantityMeasurement(Units.YARD,3.0));
+            lisyOfLengths.add( new QuantityMeasurement(Units.FOOT,3.0));
+            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.INCH);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.INCH,144.0);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
             e.printStackTrace();
@@ -366,11 +366,11 @@ public class QuantityMeasurementTest {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
             List<QuantityMeasurement> lisyOfLengths=new ArrayList();
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.YARD,3.0));
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.FOOT,3.0));
-            lisyOfLengths.add( new QuantityMeasurement(Units.LengthUnits.INCH,3.0));
-            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.LengthUnits.INCH);
-            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.LengthUnits.INCH,147.0);
+            lisyOfLengths.add( new QuantityMeasurement(Units.YARD,3.0));
+            lisyOfLengths.add( new QuantityMeasurement(Units.FOOT,3.0));
+            lisyOfLengths.add( new QuantityMeasurement(Units.INCH,3.0));
+            QuantityMeasurement actualObject=quantityMeasurement.add(lisyOfLengths, Units.INCH);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.INCH,147.0);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
             e.printStackTrace();
@@ -382,7 +382,7 @@ public class QuantityMeasurementTest {
     public void given1Gallon_whenConverted_shouldReturnInlitrePositiveTesting() {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
-            double litre=quantityMeasurement.convert(Units.VolumeUnits.GALLON,1.0, Units.VolumeUnits.LITER);
+            double litre=quantityMeasurement.convert(Units.GALLON,1.0, Units.LITER);
             Assert.assertEquals(3.78,litre,.1);
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -393,7 +393,7 @@ public class QuantityMeasurementTest {
     public void given1Gallon_whenConverted_shouldReturnInlitreNegativeTesting() {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
-            double litre=quantityMeasurement.convert(Units.VolumeUnits.GALLON,1.0, Units.VolumeUnits.LITER);
+            double litre=quantityMeasurement.convert(Units.GALLON,1.0, Units.LITER);
             Assert.assertNotEquals(3.2,litre,.1);
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -404,7 +404,7 @@ public class QuantityMeasurementTest {
     public void given1Litre_whenConverted_shouldReturnInMilliLitre() {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
-            double litre=quantityMeasurement.convert(Units.VolumeUnits.LITER,1.0, Units.VolumeUnits.MILLILITER);
+            double litre=quantityMeasurement.convert(Units.LITER,1.0, Units.MILLILITER);
             Assert.assertEquals(1000,litre,.1);
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -415,7 +415,7 @@ public class QuantityMeasurementTest {
     public void given1Litre_whenConverted_shouldReturnInMilliLitreNegativeTesting() {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
-            double litre=quantityMeasurement.convert(Units.VolumeUnits.LITER,1.0, Units.VolumeUnits.MILLILITER);
+            double litre=quantityMeasurement.convert(Units.LITER,1.0, Units.MILLILITER);
             Assert.assertNotEquals(10000,litre,.1);
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -428,10 +428,10 @@ public class QuantityMeasurementTest {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
             List<QuantityMeasurement> listOfLengths=new ArrayList();
-            listOfLengths.add( new QuantityMeasurement(Units.VolumeUnits.GALLON,1.0));
-            listOfLengths.add( new QuantityMeasurement(Units.VolumeUnits.LITER,3.78));
-            QuantityMeasurement actualObject=quantityMeasurement.add(listOfLengths, Units.VolumeUnits.LITER);
-            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.VolumeUnits.LITER,7.57);
+            listOfLengths.add( new QuantityMeasurement(Units.GALLON,1.0));
+            listOfLengths.add( new QuantityMeasurement(Units.LITER,3.78));
+            QuantityMeasurement actualObject=quantityMeasurement.add(listOfLengths, Units.LITER);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.LITER,7.56);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
             e.printStackTrace();
@@ -443,10 +443,10 @@ public class QuantityMeasurementTest {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
             List<QuantityMeasurement> listOfLengths=new ArrayList();
-            listOfLengths.add( new QuantityMeasurement(Units.VolumeUnits.MILLILITER,1000.0));
-            listOfLengths.add( new QuantityMeasurement(Units.VolumeUnits.LITER,1.0));
-            QuantityMeasurement actualObject=quantityMeasurement.add(listOfLengths, Units.VolumeUnits.LITER);
-            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.VolumeUnits.LITER,2.0);
+            listOfLengths.add( new QuantityMeasurement(Units.MILLILITER,1000.0));
+            listOfLengths.add( new QuantityMeasurement(Units.LITER,1.0));
+            QuantityMeasurement actualObject=quantityMeasurement.add(listOfLengths, Units.LITER);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.LITER,2.0);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
             e.printStackTrace();
@@ -458,10 +458,10 @@ public class QuantityMeasurementTest {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
             List<QuantityMeasurement> listOfLengths=new ArrayList();
-            listOfLengths.add( new QuantityMeasurement(Units.VolumeUnits.MILLILITER,1000.0));
-            listOfLengths.add( new QuantityMeasurement(Units.VolumeUnits.LITER,1.0));
-            QuantityMeasurement actualObject=quantityMeasurement.add(listOfLengths, Units.VolumeUnits.GALLON);
-            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.VolumeUnits.GALLON,0.53);
+            listOfLengths.add( new QuantityMeasurement(Units.MILLILITER,1000.0));
+            listOfLengths.add( new QuantityMeasurement(Units.LITER,1.0));
+            QuantityMeasurement actualObject=quantityMeasurement.add(listOfLengths, Units.GALLON);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.GALLON,0.53);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
             e.printStackTrace();
@@ -472,7 +472,7 @@ public class QuantityMeasurementTest {
     public void given1Kilogram_whenConverted_shouldReturnInGramPositiveTesting() {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
-            double grams=quantityMeasurement.convert(Units.WeightUnits.KILOGRAM,1.0, Units.WeightUnits.GRAMS);
+            double grams=quantityMeasurement.convert(Units.KILOGRAM,1.0, Units.GRAMS);
             Assert.assertEquals(1000,grams,.1);
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -482,7 +482,7 @@ public class QuantityMeasurementTest {
     public void given1Kilogram_whenConverted_shouldReturnInGramNegativeTesting() {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
-            double grams=quantityMeasurement.convert(Units.WeightUnits.KILOGRAM,1.0, Units.WeightUnits.GRAMS);
+            double grams=quantityMeasurement.convert(Units.KILOGRAM,1.0, Units.GRAMS);
             Assert.assertNotEquals(10000,grams,.1);
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -493,7 +493,7 @@ public class QuantityMeasurementTest {
     public void given1Tonne_whenConverted_shouldReturnInKilogramPositiveTesting() {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
-            double grams=quantityMeasurement.convert(Units.WeightUnits.TONNE,1.0, Units.WeightUnits.KILOGRAM);
+            double grams=quantityMeasurement.convert(Units.TONNE,1.0, Units.KILOGRAM);
             Assert.assertEquals(1000,grams,.1);
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -504,7 +504,7 @@ public class QuantityMeasurementTest {
     public void given1Tonne_whenConverted_shouldReturnInKilogramNegativeTesting() {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
-            double grams=quantityMeasurement.convert(Units.WeightUnits.TONNE,1.0, Units.WeightUnits.KILOGRAM);
+            double grams=quantityMeasurement.convert(Units.TONNE,1.0, Units.KILOGRAM);
             Assert.assertNotEquals(10000,grams,.1);
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -516,10 +516,10 @@ public class QuantityMeasurementTest {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
             List<QuantityMeasurement> listOfLengths=new ArrayList();
-            listOfLengths.add( new QuantityMeasurement(Units.WeightUnits.GRAMS,1000.0));
-            listOfLengths.add( new QuantityMeasurement(Units.WeightUnits.TONNE,1.0));
-            QuantityMeasurement actualObject=quantityMeasurement.add(listOfLengths, Units.WeightUnits.KILOGRAM);
-            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.WeightUnits.KILOGRAM,1001.0);
+            listOfLengths.add( new QuantityMeasurement(Units.GRAMS,1000.0));
+            listOfLengths.add( new QuantityMeasurement(Units.TONNE,1.0));
+            QuantityMeasurement actualObject=quantityMeasurement.add(listOfLengths, Units.KILOGRAM);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.KILOGRAM,1001.0);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
             e.printStackTrace();
@@ -531,10 +531,10 @@ public class QuantityMeasurementTest {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
             List<QuantityMeasurement> listOfLengths=new ArrayList();
-            listOfLengths.add( new QuantityMeasurement(Units.WeightUnits.KILOGRAM,1000.0));
-            listOfLengths.add( new QuantityMeasurement(Units.WeightUnits.TONNE,1.0));
-            QuantityMeasurement actualObject=quantityMeasurement.add(listOfLengths, Units.WeightUnits.TONNE);
-            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.WeightUnits.TONNE,2.00);
+            listOfLengths.add( new QuantityMeasurement(Units.KILOGRAM,1000.0));
+            listOfLengths.add( new QuantityMeasurement(Units.TONNE,1.0));
+            QuantityMeasurement actualObject=quantityMeasurement.add(listOfLengths, Units.TONNE);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.TONNE,2.00);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
             e.printStackTrace();
@@ -545,7 +545,7 @@ public class QuantityMeasurementTest {
     public void givenFarenHiet_whenConverted_shouldReturnInKilogramPositiveTesting() {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
-            double celcuis=quantityMeasurement.convert(Units.TemperatureUnits.FAHRENHIET,212.0, Units.TemperatureUnits.CELCIUS);
+            double celcuis=quantityMeasurement.convert(Units.FAHRENHIET,212.0, Units.CELCIUS);
             Assert.assertEquals(100,celcuis,.1);
         } catch (UnitLengthException e) {
             e.printStackTrace();
@@ -558,10 +558,10 @@ public class QuantityMeasurementTest {
         try{
             QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
             List<QuantityMeasurement> listOfLengths=new ArrayList();
-            listOfLengths.add( new QuantityMeasurement(Units.TemperatureUnits.CELCIUS,30.0));
-            listOfLengths.add( new QuantityMeasurement(Units.TemperatureUnits.KELVIN,373.15));
-            QuantityMeasurement actualObject=quantityMeasurement.add(listOfLengths, Units.TemperatureUnits.FAHRENHIET);
-            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.TemperatureUnits.FAHRENHIET,266.0);
+            listOfLengths.add( new QuantityMeasurement(Units.CELCIUS,30.0));
+            listOfLengths.add( new QuantityMeasurement(Units.KELVIN,373.15));
+            QuantityMeasurement actualObject=quantityMeasurement.add(listOfLengths, Units.FAHRENHIET);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.FAHRENHIET,266.0);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
             e.printStackTrace();

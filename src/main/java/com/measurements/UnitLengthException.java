@@ -3,7 +3,7 @@ package com.measurements;
 public class UnitLengthException extends Exception{
 
     enum ExceptionType {
-        NULLVALUESUPPLIED
+        NULLVALUESUPPLIED,INVALID_CONVERSION
     }
 
     ExceptionType type;
