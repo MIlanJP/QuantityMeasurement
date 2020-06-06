@@ -19,7 +19,7 @@ public enum Units {
 
 
      enum TemperatureUnits {
-        CELCIUS((9/5),32),FAHRENHIET(32,(5/9)),KELVIN(273.15);
+        CELCIUS(1),FAHRENHIET(32,(1.8   )),KELVIN(273.15);
 
         double[] temperatureValues;
         TemperatureUnits(double ... tempvalues) {

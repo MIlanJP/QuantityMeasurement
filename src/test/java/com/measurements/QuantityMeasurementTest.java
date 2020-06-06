@@ -499,6 +499,7 @@ public class QuantityMeasurementTest {
             e.printStackTrace();
         }
     }
+
     @Test
     public void given1Tonne_whenConverted_shouldReturnInKilogramNegativeTesting() {
         try{
@@ -534,6 +535,33 @@ public class QuantityMeasurementTest {
             listOfLengths.add( new QuantityMeasurement(Units.WeightUnits.TONNE,1.0));
             QuantityMeasurement actualObject=quantityMeasurement.add(listOfLengths, Units.WeightUnits.TONNE);
             QuantityMeasurement expectedObject=new QuantityMeasurement(Units.WeightUnits.TONNE,2.00);
+            Assert.assertEquals(actualObject,expectedObject);
+        }catch (UnitLengthException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenFarenHiet_whenConverted_shouldReturnInKilogramPositiveTesting() {
+        try{
+            QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
+            double celcuis=quantityMeasurement.convert(Units.TemperatureUnits.FAHRENHIET,212.0, Units.TemperatureUnits.CELCIUS);
+            Assert.assertEquals(100,celcuis,.1);
+        } catch (UnitLengthException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Test
+    public void givenCelcuisAndKelvin_whenAdded_shouldReturnInFahrenheit() {
+        try{
+            QuantityMeasurement quantityMeasurement=new QuantityMeasurement();
+            List<QuantityMeasurement> listOfLengths=new ArrayList();
+            listOfLengths.add( new QuantityMeasurement(Units.TemperatureUnits.CELCIUS,30.0));
+            listOfLengths.add( new QuantityMeasurement(Units.TemperatureUnits.KELVIN,373.15));
+            QuantityMeasurement actualObject=quantityMeasurement.add(listOfLengths, Units.TemperatureUnits.FAHRENHIET);
+            QuantityMeasurement expectedObject=new QuantityMeasurement(Units.TemperatureUnits.FAHRENHIET,266.0);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
             e.printStackTrace();
