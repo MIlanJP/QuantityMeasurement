@@ -1,6 +1,7 @@
 package com.quantityymeasurement.demo.controller;
 
 import com.quantityymeasurement.demo.enumeration.Units;
+import com.quantityymeasurement.demo.exception.QuantityMeasurementResponseException;
 import com.quantityymeasurement.demo.model.Unit;
 import com.quantityymeasurement.demo.service.QuantityMeasurementService;
 import com.quantityymeasurement.demo.exception.UnitLengthException;
@@ -44,13 +45,16 @@ public class QuantityMeasurementController {
             listOfUnits.add(new QuantityMeasurementService(Units.valueOf(splitargs[0].toUpperCase()),
                     Double.parseDouble(splitargs[1])+.00));
         }
-        double relation= (double) Units.valueOf(unit.getValue().toUpperCase()).getValue()[1];
+      try{  double relation= (double) Units.valueOf(unit.getValue().toUpperCase()).getValue()[1];
         QuantityMeasurementService value=quantityMeasurementService.add(listOfUnits,
                 Units.valueOf(unit.getValue().toUpperCase()));
         System.out.println(unit.getValue().toUpperCase()+"Printing required unit");
         unit.setValue(value.getUnits()+" "+String.valueOf(value.getQuantity()
                 /(Double)Units.valueOf(unit.getValue().toUpperCase()).getValue()[1]));
         System.out.println(unit);
+      }catch (IllegalArgumentException|UnitLengthException e){
+        throw new QuantityMeasurementResponseException("wrong unit entered");
+      }
         return unit;
     }
 
