@@ -35,4 +35,25 @@ public class QuantityMeasurementController {
         return unit;
     }
 
+    @PostMapping("/sum")
+    public Unit addLengthFromPostMethod(@RequestBody Unit unit) throws UnitLengthException {
+        List<QuantityMeasurementService> listOfUnits=new ArrayList<QuantityMeasurementService>();
+        for(String value:unit.getListOfUnits()){
+            String[] splitargs=value.split(":");
+            System.out.println(value);
+            listOfUnits.add(new QuantityMeasurementService(Units.valueOf(splitargs[0].toUpperCase()),
+                    Double.parseDouble(splitargs[1])+.00));
+        }
+        double relation= (double) Units.valueOf(unit.getValue().toUpperCase()).getValue()[1];
+        QuantityMeasurementService value=quantityMeasurementService.add(listOfUnits,
+                Units.valueOf(unit.getValue().toUpperCase()));
+        System.out.println(unit.getValue().toUpperCase()+"Printing required unit");
+        unit.setValue(value.getUnits()+" "+String.valueOf(value.getQuantity()
+                /(Double)Units.valueOf(unit.getValue().toUpperCase()).getValue()[1]));
+        System.out.println(unit);
+        return unit;
+    }
+
+
+
 }

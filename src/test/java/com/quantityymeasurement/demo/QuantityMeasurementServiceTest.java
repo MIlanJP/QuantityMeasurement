@@ -168,10 +168,10 @@ public class QuantityMeasurementServiceTest {
     public void given2InchAnd2Inch_whenAdded_shouldReturnInInch() {
         try{
             QuantityMeasurementService quantityMeasurementService =new QuantityMeasurementService();
-            List<QuantityMeasurementService> lisyOfLengths=new ArrayList();
-            lisyOfLengths.add( new QuantityMeasurementService(Units.INCH,2.0));
-            lisyOfLengths.add( new QuantityMeasurementService(Units.INCH,2.0));
-            QuantityMeasurementService actualObject= quantityMeasurementService.add(lisyOfLengths, Units.INCH);
+            List<QuantityMeasurementService> listOfLengths=new ArrayList();
+            listOfLengths.add( new QuantityMeasurementService(Units.INCH,2.0));
+            listOfLengths.add( new QuantityMeasurementService(Units.INCH,2.0));
+            QuantityMeasurementService actualObject= quantityMeasurementService.add(listOfLengths, Units.INCH);
             QuantityMeasurementService expectedObject=new QuantityMeasurementService(Units.INCH,4.0);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
@@ -183,10 +183,10 @@ public class QuantityMeasurementServiceTest {
     public void given2InchAnd2Litre_whenAdded_shouldThroughException() {
         try{
             QuantityMeasurementService quantityMeasurementService =new QuantityMeasurementService();
-            List<QuantityMeasurementService> lisyOfLengths=new ArrayList();
-            lisyOfLengths.add( new QuantityMeasurementService(Units.INCH,2.0));
-            lisyOfLengths.add( new QuantityMeasurementService(Units.LITER,2.0));
-            QuantityMeasurementService actualObject= quantityMeasurementService.add(lisyOfLengths, Units.INCH);
+            List<QuantityMeasurementService> listOfLengths=new ArrayList();
+            listOfLengths.add( new QuantityMeasurementService(Units.INCH,2.0));
+            listOfLengths.add( new QuantityMeasurementService(Units.LITER,2.0));
+            QuantityMeasurementService actualObject= quantityMeasurementService.add(listOfLengths, Units.INCH);
             QuantityMeasurementService expectedObject=new QuantityMeasurementService(Units.INCH,4.0);
         }catch (UnitLengthException e) {
             Assert.assertEquals(UnitLengthException.ExceptionType.INVALID_CONVERSION,e.type);
@@ -199,10 +199,10 @@ public class QuantityMeasurementServiceTest {
     public void given2InchAnd2LitreForWrongUnite_whenAdded_shouldThroughException() {
         try{
             QuantityMeasurementService quantityMeasurementService =new QuantityMeasurementService();
-            List<QuantityMeasurementService> lisyOfLengths=new ArrayList();
-            lisyOfLengths.add( new QuantityMeasurementService(Units.INCH,2.0));
-            lisyOfLengths.add( new QuantityMeasurementService(Units.FOOT,2.0));
-            QuantityMeasurementService actualObject= quantityMeasurementService.add(lisyOfLengths, Units.MILLILITER);
+            List<QuantityMeasurementService> listOfLengths=new ArrayList();
+            listOfLengths.add( new QuantityMeasurementService(Units.INCH,2.0));
+            listOfLengths.add( new QuantityMeasurementService(Units.FOOT,2.0));
+            QuantityMeasurementService actualObject= quantityMeasurementService.add(listOfLengths, Units.MILLILITER);
             QuantityMeasurementService expectedObject=new QuantityMeasurementService(Units.INCH,4.0);
         }catch (UnitLengthException e) {
             Assert.assertEquals(UnitLengthException.ExceptionType.INVALID_CONVERSION,e.type);
@@ -215,10 +215,10 @@ public class QuantityMeasurementServiceTest {
     public void given1FeetAnd2InchAnd3Inch_whenAdded_shouldReturnInch() {
         try{
             QuantityMeasurementService quantityMeasurementService =new QuantityMeasurementService();
-            List<QuantityMeasurementService> lisyOfLengths=new ArrayList();
-            lisyOfLengths.add( new QuantityMeasurementService(Units.FOOT,1.0));
-            lisyOfLengths.add( new QuantityMeasurementService(Units.INCH,2.0));
-            QuantityMeasurementService actualObject= quantityMeasurementService.add(lisyOfLengths, Units.INCH);
+            List<QuantityMeasurementService> listOfLengths=new ArrayList();
+            listOfLengths.add( new QuantityMeasurementService(Units.FOOT,1.0));
+            listOfLengths.add( new QuantityMeasurementService(Units.INCH,2.0));
+            QuantityMeasurementService actualObject= quantityMeasurementService.add(listOfLengths, Units.INCH);
             QuantityMeasurementService expectedObject=new QuantityMeasurementService(Units.INCH,14.0);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
@@ -230,10 +230,10 @@ public class QuantityMeasurementServiceTest {
     public void given1FeetAnd1InchAnd3Inch_whenAdded_shouldReturnInch() {
         try{
             QuantityMeasurementService quantityMeasurementService =new QuantityMeasurementService();
-            List<QuantityMeasurementService> lisyOfLengths=new ArrayList();
-            lisyOfLengths.add( new QuantityMeasurementService(Units.FOOT,1.0));
-            lisyOfLengths.add( new QuantityMeasurementService(Units.FOOT,1.0));
-            QuantityMeasurementService actualObject= quantityMeasurementService.add(lisyOfLengths, Units.INCH);
+            List<QuantityMeasurementService> listOfLengths=new ArrayList();
+            listOfLengths.add( new QuantityMeasurementService(Units.FOOT,1.0));
+            listOfLengths.add( new QuantityMeasurementService(Units.FOOT,1.0));
+            QuantityMeasurementService actualObject= quantityMeasurementService.add(listOfLengths, Units.INCH);
             QuantityMeasurementService expectedObject=new QuantityMeasurementService(Units.INCH,24.0);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {
@@ -245,10 +245,10 @@ public class QuantityMeasurementServiceTest {
     public void givenInchAndCentiMetersAnd3Inch_whenAdded_shouldReturnInch() {
         try{
             QuantityMeasurementService quantityMeasurementService =new QuantityMeasurementService();
-            List<QuantityMeasurementService> lisyOfLengths=new ArrayList();
-            lisyOfLengths.add( new QuantityMeasurementService(Units.INCH,2.0));
-            lisyOfLengths.add( new QuantityMeasurementService(Units.CENTIMETER,2.5));
-            QuantityMeasurementService actualObject= quantityMeasurementService.add(lisyOfLengths, Units.INCH);
+            List<QuantityMeasurementService> listOfLengths=new ArrayList();
+            listOfLengths.add( new QuantityMeasurementService(Units.INCH,2.0));
+            listOfLengths.add( new QuantityMeasurementService(Units.CENTIMETER,2.5));
+            QuantityMeasurementService actualObject= quantityMeasurementService.add(listOfLengths, Units.INCH);
             QuantityMeasurementService expectedObject=new QuantityMeasurementService(Units.INCH,2.98);
             Assert.assertEquals(actualObject,expectedObject);
         }catch (UnitLengthException e) {

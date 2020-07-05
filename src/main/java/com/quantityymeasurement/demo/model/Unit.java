@@ -27,7 +27,7 @@ public class Unit {
         this.value = value;
     }
 
-    public String[] getListOfLengths() {
+    public String[] getListOfUnits() {
         return listOfLengths;
     }
 
