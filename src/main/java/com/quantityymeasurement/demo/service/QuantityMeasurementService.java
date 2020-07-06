@@ -45,7 +45,7 @@ public class QuantityMeasurementService {
     }
 
     public double convert(Units unitin , Double quantity, Units unitout) throws UnitLengthException {
-        if(unitin.getValue()[0]==unitout.getValue()[0]){
+        if(unitin.getValue()[0]!=unitout.getValue()[0]){
             throw new UnitLengthException("Invalid conversion"
                     ,UnitLengthException.ExceptionType.INVALID_CONVERSION);
         }

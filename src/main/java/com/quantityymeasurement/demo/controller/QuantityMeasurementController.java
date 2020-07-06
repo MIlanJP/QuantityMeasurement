@@ -63,15 +63,21 @@ public class QuantityMeasurementController {
         return unit;
     }
 
-    @GetMapping("/convert/{unitValue}/to/{requiredUnit}")
-    public String convertUnit(@PathVariable String unitValue,@PathVariable String requiredUnit) throws UnitLengthException {
-        String[] splitUnitAndValue=unitValue.split(":");
-        String output= String.valueOf(quantityMeasurementService.convert(Units.valueOf(splitUnitAndValue[0].toUpperCase())
-                ,Double.parseDouble(splitUnitAndValue[1])+0.0,
-                Units.valueOf(requiredUnit.toUpperCase())));
-        System.out.println(output);
-        logger.info("{}",output);
-        return output;
+    @GetMapping("/convert/{unitIn}/{value}/{unitOut}")
+    public String convertUnit(@PathVariable String unitIn,@PathVariable String unitOut ,@PathVariable double value) throws UnitLengthException {
+        Double result=null;
+        Units unitin=Units.valueOf(unitIn.toUpperCase());
+        Units unitout=Units.valueOf(unitOut.toUpperCase());
+        String[] splitUnitAndValue=unitIn.split(":");
+       try {
+             result=quantityMeasurementService.convert(unitin
+                   ,value+0.0,
+                     unitout);
+       }catch(UnitLengthException e){
+           throw new QuantityMeasurementResponseException("Invalid Unit conversion");
+       }
+        logger.info("{}",result);
+        return String.valueOf(result);
     }
 
 

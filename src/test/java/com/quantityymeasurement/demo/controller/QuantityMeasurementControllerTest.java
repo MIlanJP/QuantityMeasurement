@@ -19,11 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -146,9 +144,20 @@ public class QuantityMeasurementControllerTest {
     @Test
     public void givenGetMethodAndUnits_whenConverted_ShouldReturnConvertedValue() throws Exception {
         when(quantityMeasurementService.convert(any(),any(),any())).thenReturn(2.0);
-        MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.get("/quantitymeasurement/convert/foot" +
-                ":12/to/inch")).andReturn();
+        MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.get("/quantitymeasurement/convert/foot/" +
+                "12/inch"))
+                .andReturn();
         String output=result.getResponse().getContentAsString();
         Assert.assertEquals("2.0",output);
     }
+
+    @Test
+    public void givenGetMethodAndUnits_whenConverted_ShouldReturnConvertedValueNegativeTesting() throws Exception {
+        when(quantityMeasurementService.convert(any(),any(),any())).thenReturn(2.0);
+        MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.get("/quantitymeasurement/convert/foot" +
+                ":12/to/inch")).andReturn();
+        String output=result.getResponse().getContentAsString();
+        Assert.assertNotEquals("3.0",output);
+    }
+
 }
