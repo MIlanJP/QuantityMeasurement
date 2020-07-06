@@ -1,19 +1,16 @@
 package com.quantityymeasurement.demo.model;
 
 
-import com.quantityymeasurement.demo.service.QuantityMeasurementService;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public class Unit {
     private String value;
-    private String[]  listOfLengths;
+    private String[] listOfUnits;
 
-    public Unit(String value, String[] listOfLengths) {
+    public Unit(String value, String[] listOfUnits) {
         this.value = value;
-        this.listOfLengths = listOfLengths;
+        this.listOfUnits = listOfUnits;
     }
 
     public Unit() {
@@ -28,18 +25,18 @@ public class Unit {
     }
 
     public String[] getListOfUnits() {
-        return listOfLengths;
+        return listOfUnits;
     }
 
-    public void setListOfLengths(String[] listOfLengths) {
-        this.listOfLengths = listOfLengths;
+    public void setListOfUnits(String[] listOfUnits) {
+        this.listOfUnits = listOfUnits;
     }
 
     @Override
     public String toString() {
         return "Unit{" +
                 "value=" + value +
-                ", listOfLengths=" + listOfLengths +
+                ", listOfLengths=" + listOfUnits +
                 '}';
     }
 }

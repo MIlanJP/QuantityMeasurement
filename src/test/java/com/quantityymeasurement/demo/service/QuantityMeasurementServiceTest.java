@@ -1,4 +1,4 @@
-package com.quantityymeasurement.demo;
+package com.quantityymeasurement.demo.service;
 
 import com.quantityymeasurement.demo.enumeration.Units;
 import com.quantityymeasurement.demo.service.QuantityMeasurementService;

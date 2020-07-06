@@ -27,12 +27,13 @@ public class QuantityMeasurementController {
         for(String value:splitvalues){
             String[] splitargs=value.split(":");
             listOfUnits.add(new QuantityMeasurementService(Units.valueOf(splitargs[0].toUpperCase()),
-                    Double.parseDouble(splitargs[1]+".00")));
+                    Double.parseDouble(splitargs[1])+0.00));
         }
         QuantityMeasurementService value=quantityMeasurementService.add(listOfUnits,
                 Units.valueOf(requiredunit.toUpperCase()));
-        unit=new Unit(value.getUnits()+" "+String.valueOf(value.getQuantity()), splitvalues);
-        System.out.println(unit);
+        unit=new Unit(String.valueOf(value.getUnits())+" "+String.valueOf(value.getQuantity()/
+                (Double) Units.valueOf(requiredunit.toUpperCase()).getValue()[1]), splitvalues);
+        System.out.println(unit+"Printing from contorller");
         return unit;
     }
 
@@ -56,6 +57,16 @@ public class QuantityMeasurementController {
         throw new QuantityMeasurementResponseException("wrong unit entered");
       }
         return unit;
+    }
+
+    @GetMapping("/convert/{unitvalue}/to/{requiredUnit}")
+    public String convertUnit(@PathVariable String unitValue,@PathVariable String requiredUnit) throws UnitLengthException {
+        String[] splitUnitAndValue=unitValue.split(":");
+        String output= String.valueOf(quantityMeasurementService.convert(Units.valueOf(splitUnitAndValue[0].toUpperCase())
+                ,Double.parseDouble(splitUnitAndValue[1]),
+                Units.valueOf(requiredUnit.toUpperCase())));
+        System.out.println(output);
+        return output;
     }
 
 
