@@ -12,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +21,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -75,7 +72,23 @@ public class QuantityMeasurementControllerTest {
     }
 
 
-
+    @Test
+    public void givenUnits_whenSumRequested_shouldReturnHttpStatusAsOkNegativeTesting() throws Exception {
+        String[] listOfUnits={"inch:12","foot:15"};
+        String value="YARD 3.0";
+        Unit unit=new Unit(value,listOfUnits);
+        Gson gson=new Gson();
+        String json=gson.toJson(unit);
+        System.out.println(json+"Printing json");
+        when(quantityMeasurementService.add(anyList(), any())).
+                thenReturn(new QuantityMeasurementService(Units.YARD,2.0));
+        MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.get("/quantitymeasurement/sum/inch:12,foot:13/unit/yard")
+                .accept(MediaType.APPLICATION_JSON)).andReturn();
+        String content=result.getResponse().getContentAsString();
+        Assert.assertNotEquals(400,result.getResponse().getStatus());
+        Assert.assertNotEquals(json,content);
+        logger.info(content);
+    }
 
     @Test
     public void givenUnits_whenthrownUnitLengthException_shouldReturnHttpStatusAsBadRequest() throws Exception {
