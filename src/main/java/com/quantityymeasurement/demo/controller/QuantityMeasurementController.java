@@ -5,6 +5,8 @@ import com.quantityymeasurement.demo.exception.QuantityMeasurementResponseExcept
 import com.quantityymeasurement.demo.model.Unit;
 import com.quantityymeasurement.demo.service.QuantityMeasurementService;
 import com.quantityymeasurement.demo.exception.UnitLengthException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/quantitymeasurement")
 public class QuantityMeasurementController {
+
+    Logger logger= LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     QuantityMeasurementService quantityMeasurementService;
@@ -52,20 +56,21 @@ public class QuantityMeasurementController {
         System.out.println(unit.getValue().toUpperCase()+"Printing required unit");
         unit.setValue(value.getUnits()+" "+String.valueOf(value.getQuantity()
                 /(Double)Units.valueOf(unit.getValue().toUpperCase()).getValue()[1]));
-        System.out.println(unit);
+        System.out.println(unit+"Printing from post method");
       }catch (IllegalArgumentException|UnitLengthException e){
         throw new QuantityMeasurementResponseException("wrong unit entered");
       }
         return unit;
     }
 
-    @GetMapping("/convert/{unitvalue}/to/{requiredUnit}")
+    @GetMapping("/convert/{unitValue}/to/{requiredUnit}")
     public String convertUnit(@PathVariable String unitValue,@PathVariable String requiredUnit) throws UnitLengthException {
         String[] splitUnitAndValue=unitValue.split(":");
         String output= String.valueOf(quantityMeasurementService.convert(Units.valueOf(splitUnitAndValue[0].toUpperCase())
-                ,Double.parseDouble(splitUnitAndValue[1]),
+                ,Double.parseDouble(splitUnitAndValue[1])+0.0,
                 Units.valueOf(requiredUnit.toUpperCase())));
         System.out.println(output);
+        logger.info("{}",output);
         return output;
     }
 

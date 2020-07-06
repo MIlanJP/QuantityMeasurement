@@ -19,15 +19,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.*;
 
 import static org.mockito.Mockito.*;
 
@@ -55,7 +56,7 @@ public class QuantityMeasurementControllerTest {
     }
 
     @Test
-    public void givenUnits_whenSumRequested_shouldReturnHttpStatusAsOk() throws Exception {
+    public void givenGetMethodandUnits_whenSumRequested_shouldReturnHttpStatusAsOk() throws Exception {
         String[] listOfUnits={"inch:12","foot:13"};
         String value="YARD 2.0";
         Unit unit=new Unit(value,listOfUnits);
@@ -73,7 +74,7 @@ public class QuantityMeasurementControllerTest {
 
 
     @Test
-    public void givenUnits_whenSumRequested_shouldReturnHttpStatusAsOkNegativeTesting() throws Exception {
+    public void givenGetMethodUnits_whenSumRequested_shouldReturnHttpStatusAsOkNegativeTesting() throws Exception {
         String[] listOfUnits={"inch:12","foot:15"};
         String value="YARD 3.0";
         Unit unit=new Unit(value,listOfUnits);
@@ -86,6 +87,44 @@ public class QuantityMeasurementControllerTest {
                 .accept(MediaType.APPLICATION_JSON)).andReturn();
         String content=result.getResponse().getContentAsString();
         Assert.assertNotEquals(400,result.getResponse().getStatus());
+        Assert.assertNotEquals(json,content);
+        logger.info(content);
+    }
+
+    @Test
+    public void givenPostMethodAndUnits_whenSumRequested_shouldReturnHttpStatusAsOk() throws Exception {
+        String[] listOfUnits={"inch:12","foot:15"};
+        String value="YARD";
+        String resultvalue="YARD 3.0";
+        Unit unit=new Unit(value,listOfUnits);
+        Unit unit2=new Unit(resultvalue,listOfUnits);
+        Gson gson=new Gson();
+        String parsejson=gson.toJson(unit);
+        String comparejson=gson.toJson(unit2);
+        System.out.println(parsejson+"Printing json");
+        when(quantityMeasurementService.add(anyList(), any())).
+                thenReturn(new QuantityMeasurementService(Units.YARD,3.0));
+        MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.post("/quantitymeasurement/sum")
+                .contentType(MediaType.APPLICATION_JSON).content(parsejson)).andReturn();
+        String content=result.getResponse().getContentAsString();
+        Assert.assertEquals(200,result.getResponse().getStatus());
+        Assert.assertEquals(comparejson,content);
+        logger.info(content);
+    }
+
+    @Test
+    public void givenPostMethodAndUnits_whenSumRequested_shouldReturnHttpStatusAsOkNegativeTesting() throws Exception {
+        String[] listOfUnits={"inch:12","foot:15"};
+        String value="YARD 3.0";
+        Unit unit=new Unit(value,listOfUnits);
+        Gson gson=new Gson();
+        String json=gson.toJson(unit);
+        when(quantityMeasurementService.add(anyList(), any())).
+                thenReturn(new QuantityMeasurementService(Units.YARD,2.0));
+        MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.post("/quantitymeasurement/sum")
+                .contentType(MediaType.APPLICATION_JSON).content(json)).andReturn();
+        String content=result.getResponse().getContentAsString();
+        Assert.assertNotEquals(415,result.getResponse().getStatus());
         Assert.assertNotEquals(json,content);
         logger.info(content);
     }
@@ -104,4 +143,12 @@ public class QuantityMeasurementControllerTest {
                 .accept(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
+    @Test
+    public void givenGetMethodAndUnits_whenConverted_ShouldReturnConvertedValue() throws Exception {
+        when(quantityMeasurementService.convert(any(),any(),any())).thenReturn(2.0);
+        MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.get("/quantitymeasurement/convert/foot" +
+                ":12/to/inch")).andReturn();
+        String output=result.getResponse().getContentAsString();
+        Assert.assertEquals("2.0",output);
+    }
 }
