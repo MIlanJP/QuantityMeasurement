@@ -36,17 +36,19 @@ public class QuantityMeasurementController {
         QuantityMeasurementService value=quantityMeasurementService.add(listOfUnits,
                 Units.valueOf(requiredunit.toUpperCase()));
         unit=new Unit(String.valueOf(value.getUnits())+" "+String.valueOf(value.getQuantity()/
-                (Double) Units.valueOf(requiredunit.toUpperCase()).getValue()[1]), splitvalues);
+                (Double) Units.valueOf(requiredunit.toUpperCase()).getValue()[1]));
         System.out.println(unit+"Printing from contorller");
         return unit;
     }
 
     @PostMapping("/sum")
     public Unit addLengthFromPostMethod(@RequestBody Unit unit) throws UnitLengthException {
+        String  requiredunit=unit.getValue();
         List<QuantityMeasurementService> listOfUnits=new ArrayList<QuantityMeasurementService>();
         for(String value:unit.getListOfUnits()){
             String[] splitargs=value.split(":");
             System.out.println(value);
+
             listOfUnits.add(new QuantityMeasurementService(Units.valueOf(splitargs[0].toUpperCase()),
                     Double.parseDouble(splitargs[1])+.00));
         }
@@ -58,25 +60,23 @@ public class QuantityMeasurementController {
                 /(Double)Units.valueOf(unit.getValue().toUpperCase()).getValue()[1]));
         System.out.println(unit+"Printing from post method");
       }catch (IllegalArgumentException|UnitLengthException e){
-        throw new QuantityMeasurementResponseException("wrong unit entered");
+        throw new QuantityMeasurementResponseException("Invalid Conversion to "+requiredunit);
       }
         return unit;
     }
 
     @GetMapping("/convert/{unitIn}/{value}/{unitOut}")
-    public String convertUnit(@PathVariable String unitIn,@PathVariable String unitOut ,@PathVariable double value) throws UnitLengthException {
+    public String convertUnit(@PathVariable Units unitIn,@PathVariable Units unitOut ,@PathVariable double value )
+            throws UnitLengthException {
         Double result=null;
-        Units unitin=Units.valueOf(unitIn.toUpperCase());
-        Units unitout=Units.valueOf(unitOut.toUpperCase());
-        String[] splitUnitAndValue=unitIn.split(":");
        try {
-             result=quantityMeasurementService.convert(unitin
+             result=quantityMeasurementService.convert(unitIn
                    ,value+0.0,
-                     unitout);
+                     unitOut);
        }catch(UnitLengthException e){
-           throw new QuantityMeasurementResponseException("Invalid Unit conversion");
+           throw new QuantityMeasurementResponseException("Invalid Unit conversion to "+String.valueOf(unitOut));
        }
-        logger.info("{}",result);
+//        logger.info("{}",result);
         return String.valueOf(result);
     }
 
