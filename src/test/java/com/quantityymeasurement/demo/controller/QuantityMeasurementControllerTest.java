@@ -63,7 +63,7 @@ public class QuantityMeasurementControllerTest {
         System.out.println(json+"Printing json");
         when(quantityMeasurementService.add(anyList(), any())).
                 thenReturn(new QuantityMeasurementService(Units.YARD,2.0));
-        MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.get("/quantitymeasurement/sum/inch:12,foot:13/unit/yard")
+        MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.get("/api/quantitymeasurement/sum/inch:12,foot:13/unit/yard")
                 .accept(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
         String content=result.getResponse().getContentAsString();
         Assert.assertEquals(json,content);
@@ -102,7 +102,7 @@ public class QuantityMeasurementControllerTest {
         System.out.println(parsejson+"Printing json");
         when(quantityMeasurementService.add(anyList(), any())).
                 thenReturn(new QuantityMeasurementService(Units.YARD,3.0));
-        MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.post("/quantitymeasurement/sum")
+        MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.post("/api/quantitymeasurement/sum")
                 .contentType(MediaType.APPLICATION_JSON).content(parsejson)).andReturn();
         String content=result.getResponse().getContentAsString();
         Assert.assertEquals(200,result.getResponse().getStatus());
@@ -119,7 +119,7 @@ public class QuantityMeasurementControllerTest {
         String json=gson.toJson(unit);
         when(quantityMeasurementService.add(anyList(), any())).
                 thenReturn(new QuantityMeasurementService(Units.YARD,2.0));
-        MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.post("/quantitymeasurement/sum")
+        MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.post("/api/quantitymeasurement/sum")
                 .contentType(MediaType.APPLICATION_JSON).content(json)).andReturn();
         String content=result.getResponse().getContentAsString();
         Assert.assertNotEquals(415,result.getResponse().getStatus());
@@ -130,21 +130,21 @@ public class QuantityMeasurementControllerTest {
     @Test
     public void givenUnits_whenthrownUnitLengthException_shouldReturnHttpStatusAsBadRequest() throws Exception {
         when(quantityMeasurementService.add(anyList(), any())).thenThrow(UnitLengthException.class);
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/quantitymeasurement/sum/inch:12,foot:13/unit/inch")
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/quantitymeasurement/sum/inch:12,foot:13/unit/inch")
                 .accept(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
     @Test
     public void givenUnits_whenthrownIllegalArgumentException_shouldReturnHttpStatusAsBadRequest() throws Exception {
         when(quantityMeasurementService.add(anyList(), any())).thenThrow(QuantityMeasurementResponseException.class);
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/quantitymeasurement/sum/inch:12,foot:13/unit/inch")
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/quantitymeasurement/sum/inch:12,foot:13/unit/inch")
                 .accept(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
     @Test
     public void givenGetMethodAndUnits_whenConverted_ShouldReturnConvertedValue() throws Exception {
         when(quantityMeasurementService.convert(any(),any(),any())).thenReturn(2.0);
-        MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.get("/quantitymeasurement/convert/foot/" +
+        MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.get("/api/quantitymeasurement/convert/foot/" +
                 "12/inch"))
                 .andReturn();
         String output=result.getResponse().getContentAsString();
@@ -154,7 +154,7 @@ public class QuantityMeasurementControllerTest {
     @Test
     public void givenGetMethodAndUnits_whenConverted_ShouldReturnConvertedValueNegativeTesting() throws Exception {
         when(quantityMeasurementService.convert(any(),any(),any())).thenReturn(2.0);
-        MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.get("/quantitymeasurement/convert/foot" +
+        MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.get("/api/quantitymeasurement/convert/foot" +
                 ":12/to/inch")).andReturn();
         String output=result.getResponse().getContentAsString();
         Assert.assertNotEquals("3.0",output);
