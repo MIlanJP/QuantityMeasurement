@@ -6,6 +6,7 @@ import com.quantityymeasurement.demo.enumeration.Units;
 import com.quantityymeasurement.demo.exception.QuantityMeasurementResponseException;
 import com.quantityymeasurement.demo.exception.UnitLengthException;
 import com.quantityymeasurement.demo.model.Unit;
+import com.quantityymeasurement.demo.model.UnitDto;
 import com.quantityymeasurement.demo.service.QuantityMeasurementService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -58,15 +59,17 @@ public class QuantityMeasurementControllerTest {
         String[] listOfUnits={"inch:12","foot:13"};
         String value="YARD 2.0";
         Unit unit=new Unit(value,listOfUnits);
+        UnitDto unitDto=new UnitDto("Operation Sucessful","2.0");
         Gson gson=new Gson();
         String json=gson.toJson(unit);
+        String resultContent=gson.toJson(unitDto);
         System.out.println(json+"Printing json");
         when(quantityMeasurementService.add(anyList(), any())).
-                thenReturn(new QuantityMeasurementService(Units.YARD,2.0));
+                thenReturn(new QuantityMeasurementService(Units.YARD,2.0/(Double)Units.YARD.getValue()[1]));
         MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.get("/api/quantitymeasurement/sum/inch:12,foot:13/unit/yard")
                 .accept(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
         String content=result.getResponse().getContentAsString();
-        Assert.assertEquals(json,content);
+        Assert.assertEquals(resultContent,content);
         logger.info(content);
     }
 
@@ -92,16 +95,18 @@ public class QuantityMeasurementControllerTest {
     @Test
     public void givenPostMethodAndUnits_whenSumRequested_shouldReturnHttpStatusAsOk() throws Exception {
         String[] listOfUnits={"inch:12","foot:15"};
-        String value="YARD";
-        String resultvalue="YARD 3.0";
+        String value="FOOT";
+        String resultvalue="FOOT 3.0";
         Unit unit=new Unit(value,listOfUnits);
-        Unit unit2=new Unit(resultvalue,listOfUnits);
+        UnitDto unitDto=new UnitDto("Operation Sucessfull","3.0");
         Gson gson=new Gson();
         String parsejson=gson.toJson(unit);
-        String comparejson=gson.toJson(unit2);
+        String comparejson=gson.toJson(unitDto);
         System.out.println(parsejson+"Printing json");
         when(quantityMeasurementService.add(anyList(), any())).
-                thenReturn(new QuantityMeasurementService(Units.YARD,3.0));
+                thenReturn(new QuantityMeasurementService(Units.FOOT,3.0/(Double)Units.FOOT.getValue()[1]));
+        when(quantityMeasurementService.getQuantity()).
+                thenReturn(3.0);
         MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.post("/api/quantitymeasurement/sum")
                 .contentType(MediaType.APPLICATION_JSON).content(parsejson)).andReturn();
         String content=result.getResponse().getContentAsString();
@@ -113,7 +118,7 @@ public class QuantityMeasurementControllerTest {
     @Test
     public void givenPostMethodAndUnits_whenSumRequested_shouldReturnHttpStatusAsOkNegativeTesting() throws Exception {
         String[] listOfUnits={"inch:12","foot:15"};
-        String value="YARD 3.0";
+        String value="YARD 2.0";
         Unit unit=new Unit(value,listOfUnits);
         Gson gson=new Gson();
         String json=gson.toJson(unit);
@@ -144,8 +149,8 @@ public class QuantityMeasurementControllerTest {
     @Test
     public void givenGetMethodAndUnits_whenConverted_ShouldReturnConvertedValue() throws Exception {
         when(quantityMeasurementService.convert(any(),any(),any())).thenReturn(2.0);
-        MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.get("/api/quantitymeasurement/convert/foot/" +
-                "12/inch"))
+        MvcResult result=this.mockMvc.perform(MockMvcRequestBuilders.get("/api/quantitymeasurement/convert/FOOT/" +
+                "12/INCH"))
                 .andReturn();
         String output=result.getResponse().getContentAsString();
         Assert.assertEquals("2.0",output);
