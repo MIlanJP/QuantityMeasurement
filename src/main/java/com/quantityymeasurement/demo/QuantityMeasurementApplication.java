@@ -24,7 +24,7 @@ public class QuantityMeasurementApplication {
 
     @Bean
     public Docket swaggerConfiguration(){
-        return new Docket(DocumentationType.SWAGGER_2).select().paths(PathSelectors.ant("/api/quantitymeasurement/*")).
+        return new Docket(DocumentationType.SWAGGER_2).select().paths(PathSelectors.ant("/api/quantitymeasurement/**")).
                 apis(RequestHandlerSelectors.basePackage("com.quantityymeasurement.demo")).build().apiInfo(metaData());
     }
 
@@ -34,7 +34,7 @@ public class QuantityMeasurementApplication {
                     "Quantity Measurement API is about you can use it convert any units and add any units",
                     "1",
                     "Terms",
-                    new Contact("Milan", "http://localhost:8080/quantitymeasurement", "milan@gmail.com"),
+                    new Contact("Milan", "http://localhost:8080/v2/api-docs", "milan@gmail.com"),
                     "License of API", "API license URL", Collections.emptyList());
     }
 

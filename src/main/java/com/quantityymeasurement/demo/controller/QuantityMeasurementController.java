@@ -34,7 +34,7 @@ public class QuantityMeasurementController {
     Unit unit;
 
     @ApiOperation(value = "Addition Operation Type1")
-    @GetMapping("/sum/{values}/unit/{requiredunit}")
+    @GetMapping("/addition/{values}/unit/{requiredunit}")
     public ResponseEntity<UnitDto> addLength(@PathVariable String values, @PathVariable String requiredunit) throws UnitLengthException {
         List<QuantityMeasurementService> listOfUnits=new ArrayList<QuantityMeasurementService>();
         String[] splitvalues=values.split(",");
