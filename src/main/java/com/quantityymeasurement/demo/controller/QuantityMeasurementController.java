@@ -13,7 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/quantitymeasurement")
@@ -40,6 +42,7 @@ public class QuantityMeasurementController {
                 Units.valueOf(requiredunit.toUpperCase()));
         unitDto.setValue(String.valueOf(value.getQuantity()));
         unitDto.setMessage("Operation Sucessful");
+        unitDto.setStatus(HttpStatus.OK.value());
         unit=new Unit(String.valueOf(value.getUnits())+" "+String.valueOf(value.getQuantity()/
                 (Double) Units.valueOf(requiredunit.toUpperCase()).getValue()[1]));
         System.out.println(unit+"Printing from contorller");
@@ -63,6 +66,7 @@ public class QuantityMeasurementController {
                 Units.valueOf(unit.getValue().toUpperCase()));
         unitDto.setValue(String.valueOf(value.getQuantity()));
         unitDto.setMessage("Operation Sucessfull");
+        unitDto.setStatus(HttpStatus.OK.value());
       }catch (IllegalArgumentException|UnitLengthException e){
         throw new QuantityMeasurementResponseException("Invalid Conversion to "+requiredunit);
       }
@@ -83,9 +87,11 @@ public class QuantityMeasurementController {
         return String.valueOf(result);
     }
 
-    @GetMapping(/baseunits)
-    public String returnBaseUnit(){
-
+    @GetMapping("/baseunits/{baseUnits}")
+    public List returnBaseUnit(Units.BaseUnit baseUnits ){
+        List<Units> listOfUnits=new ArrayList<Units>(EnumSet.allOf(Units.class));
+        return listOfUnits.stream().filter(units->units.getValue()[0]==baseUnits)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
 

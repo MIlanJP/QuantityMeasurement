@@ -29,6 +29,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 
+import java.util.*;
+
 import static org.mockito.Mockito.*;
 
 @SpringBootTest(classes = {QuantityMeasurementApplication.class})
@@ -59,7 +61,7 @@ public class QuantityMeasurementControllerTest {
         String[] listOfUnits={"inch:12","foot:13"};
         String value="YARD 2.0";
         Unit unit=new Unit(value,listOfUnits);
-        UnitDto unitDto=new UnitDto("Operation Sucessful","2.0");
+        UnitDto unitDto=new UnitDto("Operation Sucessful","2.0",200);
         Gson gson=new Gson();
         String json=gson.toJson(unit);
         String resultContent=gson.toJson(unitDto);
@@ -98,7 +100,7 @@ public class QuantityMeasurementControllerTest {
         String value="FOOT";
         String resultvalue="FOOT 3.0";
         Unit unit=new Unit(value,listOfUnits);
-        UnitDto unitDto=new UnitDto("Operation Sucessfull","3.0");
+        UnitDto unitDto=new UnitDto("Operation Sucessfull","3.0",200);
         Gson gson=new Gson();
         String parsejson=gson.toJson(unit);
         String comparejson=gson.toJson(unitDto);
@@ -165,4 +167,9 @@ public class QuantityMeasurementControllerTest {
         Assert.assertNotEquals("3.0",output);
     }
 
+    @Test
+    public void set() {
+        List<Units> listOfUnits=new ArrayList<Units>(EnumSet.allOf(Units.class));
+        System.out.println(listOfUnits);
+    }
 }

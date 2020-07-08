@@ -4,6 +4,7 @@ import com.quantityymeasurement.demo.enumeration.Units;
 import com.quantityymeasurement.demo.exception.UnitLengthException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -11,6 +12,7 @@ public class QuantityMeasurementService {
 
     private double quantity;
     private Units units;
+    private List<Units> listOfUnits=new ArrayList();
 
     public double getQuantity() {
         return quantity;
@@ -28,7 +30,9 @@ public class QuantityMeasurementService {
         this.units = units;
     }
 
-    public QuantityMeasurementService() {}
+    public QuantityMeasurementService() {
+
+    }
 
     public QuantityMeasurementService(Units units, Double quantity)  {
         if(units.getValue()[0]!="TEMPERATURE")

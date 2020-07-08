@@ -5,10 +5,12 @@ import java.util.Objects;
 public class UnitDto {
     private String message;
     private String value;
+    private int status;
 
-    public UnitDto(String message, String value) {
+    public UnitDto(String message, String value, int status) {
         this.message = message;
         this.value = value;
+        this.status = status;
     }
 
     @Override
@@ -21,6 +23,14 @@ public class UnitDto {
     }
 
     public UnitDto() {
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getMessage() {
