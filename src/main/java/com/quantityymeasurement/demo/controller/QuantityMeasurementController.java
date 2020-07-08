@@ -1,7 +1,9 @@
 package com.quantityymeasurement.demo.controller;
 
+import com.quantityymeasurement.demo.enumeration.BaseUnit;
 import com.quantityymeasurement.demo.enumeration.Units;
 import com.quantityymeasurement.demo.exception.QuantityMeasurementResponseException;
+import com.quantityymeasurement.demo.exception.response.BaseUnitsDto;
 import com.quantityymeasurement.demo.model.Unit;
 import com.quantityymeasurement.demo.model.UnitDto;
 import com.quantityymeasurement.demo.service.QuantityMeasurementService;
@@ -88,11 +90,27 @@ public class QuantityMeasurementController {
     }
 
     @GetMapping("/baseunits/{baseUnits}")
-    public List returnBaseUnit(Units.BaseUnit baseUnits ){
+    public ResponseEntity<BaseUnitsDto> returnSubUnit(BaseUnit baseUnits ){
         List<Units> listOfUnits=new ArrayList<Units>(EnumSet.allOf(Units.class));
-        return listOfUnits.stream().filter(units->units.getValue()[0]==baseUnits)
+        List listOfSubUnits= listOfUnits.stream().filter(units->units.getValue()[0]==baseUnits)
                 .collect(Collectors.toCollection(ArrayList::new));
+        BaseUnitsDto baseUnitsDto=new BaseUnitsDto("Printing all subunits",listOfSubUnits,200);
+        return new ResponseEntity<BaseUnitsDto>(baseUnitsDto,HttpStatus.OK);
     }
 
+    @GetMapping("/subunits")
+    public ResponseEntity<BaseUnitsDto> returnAllSubUnits(){
+        List<Units> listOfUnits=new ArrayList<Units>(EnumSet.allOf(Units.class));
+
+        BaseUnitsDto baseUnitsDto=new BaseUnitsDto("Printing all subunits",listOfUnits,200);
+        return new ResponseEntity<BaseUnitsDto>(baseUnitsDto,HttpStatus.OK);
+    }
+
+    @GetMapping("/baseunits")
+    public ResponseEntity<BaseUnitsDto> returnBaseUnit(BaseUnit baseUnit){
+        List<BaseUnit> listOfUnits=new ArrayList<BaseUnit>(EnumSet.allOf(BaseUnit.class));
+        BaseUnitsDto baseUnitsDto=new BaseUnitsDto("Printing all subunits",listOfUnits,200);
+        return new ResponseEntity<BaseUnitsDto>(baseUnitsDto,HttpStatus.OK);
+    }
 
 }

@@ -1,5 +1,7 @@
 package com.quantityymeasurement.demo.enumeration;
 
+import com.quantityymeasurement.demo.enumeration.BaseUnit;
+
 public enum Units {
     INCH(BaseUnit.LENGTH,1.0),FOOT(BaseUnit.LENGTH,12.0),YARD(BaseUnit.LENGTH,36.0),CENTIMETER(BaseUnit.LENGTH,.393701),
     KILOGRAM(BaseUnit.WEIGHT,1.0),GRAMS(BaseUnit.WEIGHT,.001),TONNE(BaseUnit.WEIGHT,1000.0),
@@ -20,8 +22,6 @@ public enum Units {
         return values;
     }
 
-    public enum BaseUnit{
-        LENGTH,WEIGHT,VOLUME,TEMPERATURE
-    }
+
 
 }
