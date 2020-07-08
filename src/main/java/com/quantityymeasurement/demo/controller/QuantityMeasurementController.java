@@ -8,6 +8,7 @@ import com.quantityymeasurement.demo.model.Unit;
 import com.quantityymeasurement.demo.response.UnitDto;
 import com.quantityymeasurement.demo.service.QuantityMeasurementService;
 import com.quantityymeasurement.demo.exception.UnitLengthException;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/quantitymeasurement")
+@Api(value = "Quantity Measurement API")
 public class QuantityMeasurementController {
 
     Logger logger= LoggerFactory.getLogger(this.getClass());

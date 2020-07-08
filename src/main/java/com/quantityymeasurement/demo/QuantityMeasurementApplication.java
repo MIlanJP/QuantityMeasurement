@@ -1,7 +1,9 @@
 package com.quantityymeasurement.demo;
 
+import io.swagger.annotations.Api;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -20,10 +22,20 @@ public class QuantityMeasurementApplication {
         SpringApplication.run(QuantityMeasurementApplication.class, args);
     }
 
-
+    @Bean
     public Docket swaggerConfiguration(){
-        return new Docket(DocumentationType.SWAGGER_2).select().paths(PathSelectors.ant("/api/*")).
-                apis(RequestHandlerSelectors.basePackage("com.quantityymeasurement.demo")).build();
+        return new Docket(DocumentationType.SWAGGER_2).select().paths(PathSelectors.ant("/api/quantitymeasurement/*")).
+                apis(RequestHandlerSelectors.basePackage("com.quantityymeasurement.demo")).build().apiInfo(metaData());
+    }
+
+    private ApiInfo metaData() {
+            return new ApiInfo(
+                    "Quantity Measurement",
+                    "Quantity Measurement API is about you can use it convert any units and add any units",
+                    "1",
+                    "Terms",
+                    new Contact("Milan", "http://localhost:8080/quantitymeasurement", "milan@gmail.com"),
+                    "License of API", "API license URL", Collections.emptyList());
     }
 
 
