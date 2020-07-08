@@ -6,7 +6,7 @@ import com.quantityymeasurement.demo.enumeration.Units;
 import com.quantityymeasurement.demo.exception.QuantityMeasurementResponseException;
 import com.quantityymeasurement.demo.exception.UnitLengthException;
 import com.quantityymeasurement.demo.model.Unit;
-import com.quantityymeasurement.demo.model.UnitDto;
+import com.quantityymeasurement.demo.response.UnitDto;
 import com.quantityymeasurement.demo.service.QuantityMeasurementService;
 import org.junit.Assert;
 import org.junit.Before;

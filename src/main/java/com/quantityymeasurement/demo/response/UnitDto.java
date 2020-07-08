@@ -1,4 +1,4 @@
-package com.quantityymeasurement.demo.model;
+package com.quantityymeasurement.demo.response;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package com.quantityymeasurement.demo.exception.response;
+package com.quantityymeasurement.demo.response;
 
 import java.util.*;
 

@@ -3,11 +3,12 @@ package com.quantityymeasurement.demo.controller;
 import com.quantityymeasurement.demo.enumeration.BaseUnit;
 import com.quantityymeasurement.demo.enumeration.Units;
 import com.quantityymeasurement.demo.exception.QuantityMeasurementResponseException;
-import com.quantityymeasurement.demo.exception.response.BaseUnitsDto;
+import com.quantityymeasurement.demo.response.BaseUnitsDto;
 import com.quantityymeasurement.demo.model.Unit;
-import com.quantityymeasurement.demo.model.UnitDto;
+import com.quantityymeasurement.demo.response.UnitDto;
 import com.quantityymeasurement.demo.service.QuantityMeasurementService;
 import com.quantityymeasurement.demo.exception.UnitLengthException;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ public class QuantityMeasurementController {
 
     Unit unit;
 
+    @ApiOperation(value = "Addition Operation Type1")
     @GetMapping("/sum/{values}/unit/{requiredunit}")
     public ResponseEntity<UnitDto> addLength(@PathVariable String values, @PathVariable String requiredunit) throws UnitLengthException {
         List<QuantityMeasurementService> listOfUnits=new ArrayList<QuantityMeasurementService>();
@@ -51,6 +53,7 @@ public class QuantityMeasurementController {
         return new ResponseEntity<UnitDto>(unitDto,HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Addition Operation Input:JSON")
     @PostMapping("/sum")
     public ResponseEntity<UnitDto> addLengthFromPostMethod(@RequestBody Unit unit) throws UnitLengthException {
         String  requiredunit=unit.getValue();
@@ -75,6 +78,7 @@ public class QuantityMeasurementController {
         return new ResponseEntity<UnitDto>(unitDto,HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Converson Operation")
     @GetMapping("/convert/{unitIn}/{value}/{unitOut}")
     public String convertUnit(@PathVariable Units unitIn,@PathVariable Units unitOut ,@PathVariable double value )
             throws UnitLengthException {
@@ -89,15 +93,18 @@ public class QuantityMeasurementController {
         return String.valueOf(result);
     }
 
+    @ApiOperation(value = "Display SubUnits of Selected Base Unit")
     @GetMapping("/baseunits/{baseUnits}")
     public ResponseEntity<BaseUnitsDto> returnSubUnit(BaseUnit baseUnits ){
         List<Units> listOfUnits=new ArrayList<Units>(EnumSet.allOf(Units.class));
         List listOfSubUnits= listOfUnits.stream().filter(units->units.getValue()[0]==baseUnits)
                 .collect(Collectors.toCollection(ArrayList::new));
-        BaseUnitsDto baseUnitsDto=new BaseUnitsDto("Printing all subunits",listOfSubUnits,200);
+        BaseUnitsDto baseUnitsDto=new BaseUnitsDto("Printing all subunits of "+String.valueOf(baseUnits)
+                ,listOfSubUnits,200);
         return new ResponseEntity<BaseUnitsDto>(baseUnitsDto,HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Display all SubUnits")
     @GetMapping("/subunits")
     public ResponseEntity<BaseUnitsDto> returnAllSubUnits(){
         List<Units> listOfUnits=new ArrayList<Units>(EnumSet.allOf(Units.class));
@@ -106,10 +113,11 @@ public class QuantityMeasurementController {
         return new ResponseEntity<BaseUnitsDto>(baseUnitsDto,HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Display all BaseUnits")
     @GetMapping("/baseunits")
     public ResponseEntity<BaseUnitsDto> returnBaseUnit(BaseUnit baseUnit){
         List<BaseUnit> listOfUnits=new ArrayList<BaseUnit>(EnumSet.allOf(BaseUnit.class));
-        BaseUnitsDto baseUnitsDto=new BaseUnitsDto("Printing all subunits",listOfUnits,200);
+        BaseUnitsDto baseUnitsDto=new BaseUnitsDto("Printing all baseUnits",listOfUnits,200);
         return new ResponseEntity<BaseUnitsDto>(baseUnitsDto,HttpStatus.OK);
     }
 
