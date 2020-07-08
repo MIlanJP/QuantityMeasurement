@@ -1,9 +1,9 @@
 package com.quantityymeasurement.demo.enumeration;
 
 public enum Units {
-    INCH("LENGTH",1.0),FOOT("LENGTH",12.0),YARD("LENGTH",36.0),CENTIMETER("LENGTH",.393701),
-    KILOGRAM("WEIGHT",1.0),GRAMS("WEIGHT",.001),TONNE("WEIGHT",1000.0),
-    LITER("VOLUME",1000.0),MILLILITER("VOLUME",1.0),GALLON("VOLUME",3780.00),
+    INCH(BaseUnit.LENGTH,1.0),FOOT(BaseUnit.LENGTH,12.0),YARD(BaseUnit.LENGTH,36.0),CENTIMETER(BaseUnit.LENGTH,.393701),
+    KILOGRAM(BaseUnit.WEIGHT,1.0),GRAMS(BaseUnit.WEIGHT,.001),TONNE(BaseUnit.WEIGHT,1000.0),
+    LITER(BaseUnit.VOLUME,1000.0),MILLILITER(BaseUnit.VOLUME,1.0),GALLON(BaseUnit.VOLUME,3780.00),
     CELCIUS("TEMPERATURE",1.0),
     KELVIN("TEMPERATURE",273.15),
     FAHRENHIET("TEMPERATURE",1.8,32.0)
@@ -18,6 +18,10 @@ public enum Units {
 
     public Object[] getValue() {
         return values;
+    }
+
+    enum BaseUnit{
+        LENGTH,WEIGHT,VOLUME
     }
 
 }
