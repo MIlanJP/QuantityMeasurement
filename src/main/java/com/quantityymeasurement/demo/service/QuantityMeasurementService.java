@@ -40,7 +40,7 @@ public class QuantityMeasurementService {
             this.quantity =(Double)units.getValue()[1]*quantity;
         else if(units.getValue()[0]==BaseUnit.TEMPERATURE){
             if(units==Units.FAHRENHIET)
-                this.quantity =(quantity -(Double)units.getValue()[1])*(1.00/(Double)units.getValue()[2]);
+                this.quantity =(quantity -32.0)*(1.00/1.80);
        else if(units==Units.KELVIN)
             this.quantity = quantity -(Double)units.getValue()[1];
        else
@@ -62,13 +62,13 @@ public class QuantityMeasurementService {
             this.quantity=converttobaseValue.quantity;
             if(unitout.equals(Units.KELVIN)){
 
-                this.quantity=converttobaseValue.quantity+273.0;
+                this.quantity=converttobaseValue.quantity+273.15;
             }else if(unitout.equals(Units.FAHRENHIET)){
                 this.quantity=(converttobaseValue.quantity*(1.80))+32.0;
             }else{
-                this.quantity=converttobaseValue.quantity;
+                this.quantity= Math.round(converttobaseValue.quantity *100.0)/100.0;
             }
-            return Math.round(this.quantity *100.0)/100.0;
+            return this.quantity;
         }else{
             this.quantity =(Double)unitin.getValue()[1]*quantity;
             return Math.round(this.quantity /(Double)unitout.getValue()[1]*100.0)/100.0;
