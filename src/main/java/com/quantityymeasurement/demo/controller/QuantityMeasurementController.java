@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/quantitymeasurement")
 @Api(value = "Quantity Measurement API")
+@CrossOrigin("http://localhost:3000")
 public class QuantityMeasurementController {
 
     Logger logger= LoggerFactory.getLogger(this.getClass());

@@ -1,5 +1,6 @@
 package com.quantityymeasurement.demo.service;
 
+import com.quantityymeasurement.demo.enumeration.BaseUnit;
 import com.quantityymeasurement.demo.enumeration.Units;
 import com.quantityymeasurement.demo.exception.UnitLengthException;
 import org.springframework.stereotype.Service;
@@ -35,9 +36,9 @@ public class QuantityMeasurementService {
     }
 
     public QuantityMeasurementService(Units units, Double quantity)  {
-        if(units.getValue()[0]!="TEMPERATURE")
+        if(units.getValue()[0]!=BaseUnit.TEMPERATURE)
             this.quantity =(Double)units.getValue()[1]*quantity;
-        else if(units.getValue()[0]=="TEMPERATURE"){
+        else if(units.getValue()[0]==BaseUnit.TEMPERATURE){
             if(units==Units.FAHRENHIET)
                 this.quantity =(quantity -(Double)units.getValue()[1])*(1.00/(Double)units.getValue()[2]);
        else if(units==Units.KELVIN)
@@ -56,8 +57,24 @@ public class QuantityMeasurementService {
         if(quantity==null||unitout==null||unitin==null)
             throw new UnitLengthException("null value entered"
                     ,UnitLengthException.ExceptionType.NULLVALUESUPPLIED);
-        this.quantity =(Double)unitin.getValue()[1]*quantity;
-        return Math.round(this.quantity /(Double)unitout.getValue()[1]*100.0)/100.0;
+        if(unitin.getValue()[0]== BaseUnit.TEMPERATURE){
+            QuantityMeasurementService converttobaseValue=new QuantityMeasurementService(unitin, quantity);
+            this.quantity=converttobaseValue.quantity;
+            if(unitout.equals(Units.KELVIN)){
+
+                this.quantity=converttobaseValue.quantity+273.0;
+            }else if(unitout.equals(Units.FAHRENHIET)){
+                this.quantity=(converttobaseValue.quantity*(1.80))+32.0;
+            }else{
+                this.quantity=converttobaseValue.quantity;
+            }
+            return Math.round(this.quantity *100.0)/100.0;
+        }else{
+            this.quantity =(Double)unitin.getValue()[1]*quantity;
+            return Math.round(this.quantity /(Double)unitout.getValue()[1]*100.0)/100.0;
+        }
+
+
     }
 
     public QuantityMeasurementService add(List<QuantityMeasurementService> lengths, Units requiredUnit) throws UnitLengthException {
